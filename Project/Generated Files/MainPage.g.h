@@ -39,6 +39,7 @@ namespace Project
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1B;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1C;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ TitleText;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ Timer;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Result;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Capacity;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ WeightBlock;

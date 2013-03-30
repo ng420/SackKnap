@@ -42,7 +42,7 @@
             </Grid>
             <Grid Name="Grid1C" Grid.Column="2">
                 <StackPanel>
-                    <TextBlock Text="Time Elapsed : 1:03" FontSize="24" Margin="15,25,0,0" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="Timer" Text="{Binding Path=Time}" FontSize="24" Margin="15,25,0,0" TextWrapping="Wrap"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Current Profit:" TextAlignment="Center" FontSize="24" Margin="15,0,0,0"/>
                         <TextBlock x:Name="ProfitBlock" Text="{Binding Path=Profit}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0"/>

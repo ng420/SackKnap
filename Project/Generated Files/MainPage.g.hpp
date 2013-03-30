@@ -36,6 +36,8 @@ void ::Project::MainPage::InitializeComponent()
     Grid1C = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1C"));
     // Get the TextBlock named 'TitleText'
     TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
+    // Get the TextBlock named 'Timer'
+    Timer = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Timer"));
     // Get the TextBlock named 'Result'
     Result = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Result"));
     // Get the TextBlock named 'Capacity'
