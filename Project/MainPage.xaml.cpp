@@ -142,6 +142,14 @@ void MainPage::AnalyzeObjects()
 	Silver->Text=ObjGrp->Silver;
 	Bronze->Text=ObjGrp->Bronze;
 	Minimum->Text=ObjGrp->Minimum;
+	mid->Text=ObjGrp->Capacity;
+	int total_weight=0;
+	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
+	{
+		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+	}
+	end->Text=ConvertToPString(total_weight);
+
 	}
 Platform::String^ MainPage::ConvertToPString(int val)
 	{
@@ -178,8 +186,24 @@ void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Wind
 		ObjGrp->Weight=conv(ObjGrp->Weight,ob->weight);
 	}
 
-		ProfitBlock->Text=ObjGrp->Profit;
-		WeightBlock->Text=ObjGrp->Weight;
+	ProfitBlock->Text=ObjGrp->Profit;
+	WeightBlock->Text=ObjGrp->Weight;
+
+	progress_main->Value=min((ConvertToInt(ObjGrp->Weight)*100)/(ConvertToInt(ObjGrp->Capacity)),100);
+	int total_weight=0;
+	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
+	{
+		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+	}
+	if (ConvertToInt(ObjGrp->Weight)>ConvertToInt(ObjGrp->Capacity))
+	{
+		progress_total->Value=((ConvertToInt(ObjGrp->Weight)-ConvertToInt(ObjGrp->Capacity))*100)/(total_weight-ConvertToInt(ObjGrp->Capacity));
+	}
+	else
+	{
+		progress_total->Value=0;
+	}
+
 	
 }
 
