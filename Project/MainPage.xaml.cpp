@@ -47,10 +47,12 @@ void MainPage::Initialize()
 {
 	InitializeObjects();
 	AnalyzeObjects();
+	StartTimerAndRegisterHandler();
 	this->DataContext = ObjGrp;
 }
 void MainPage::InitializeObjects()
 {
+		IsPaused=false;
 	ObjGrp->Time="0:00";
 	ObjGrp->Profit="0";
 	ObjGrp->Weight="0";
@@ -258,12 +260,61 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		{
 			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
 			Result->Text="Try Again was selected";
+			IsPaused=false;
 		
 		})));
 		 flyout->DefaultCommandIndex = 0;
 		// Set the command to be invoked when escape is pressed
 		  flyout->CancelCommandIndex = 0;
 	}
-
+	IsPaused=true;
 	flyout->ShowAsync();
 }
+void Project::MainPage::StartTimerAndRegisterHandler()
+{
+	DispatcherTimer^ timer=ref new DispatcherTimer();
+    TimeSpan ts;
+    ts.Duration = 10000000;
+    timer->Interval = ts;
+    timer->Start();
+	timer->Tick += ref new EventHandler<Object^>(this,&Project::MainPage::OnTick);
+}
+void Project::MainPage::OnTick(Object^ sender,Object^ e)
+{   
+	Platform::String^ time = ObjGrp->Time;
+	const wchar_t* T = time->Data();
+	char second[3],minute[3];
+	int i;
+	int Size = wcslen(T);
+	char *CString= new char[Size + 1];
+	for(i=0;i<Size;i++)
+	{
+		CString[i] = (char)T[i];
+	}
+	minute[0]=CString[0];
+	for(i=2;i<Size;i++)
+		second[i-2]=CString[i];
+	int seconds=atoi(second);
+	int minutes=atoi(minute);
+	seconds += 1;
+	if(seconds==60)
+	{
+		seconds=0;
+		minutes+=1;
+ 	}
+	char tim[3],tis[3];
+	_itoa_s(minutes,tim,10);
+	_itoa_s(seconds,tis,10);
+	std::string m_str = std::string(tim);
+	std::string s_str = std::string(tis);
+	std::wstring widm_str = std::wstring(m_str.begin(), m_str.end());
+	std::wstring wids_str = std::wstring(s_str.begin(), s_str.end());
+	const wchar_t* wm_char = widm_str.c_str();
+	const wchar_t* ws_char = wids_str.c_str();
+	Platform::String^ m_string = ref new Platform::String(wm_char);
+	Platform::String^ s_string = ref new Platform::String(ws_char);
+	if(!IsPaused) 
+		ObjGrp->Time=(seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string);
+	Timer->Text=ObjGrp->Time;
+ }
+
