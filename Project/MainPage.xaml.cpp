@@ -49,6 +49,14 @@ void MainPage::Initialize()
 	AnalyzeObjects();
 	StartTimerAndRegisterHandler();
 	this->DataContext = ObjGrp;
+
+	mid->Text=ObjGrp->Capacity;
+	int total_weight=0;
+	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
+	{
+		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+	}
+	end->Text=ConvertToPString(total_weight);
 }
 void MainPage::InitializeObjects()
 {

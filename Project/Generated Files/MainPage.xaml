@@ -73,32 +73,39 @@
             VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" Foreground="White"/>
 
         <Grid Name="grid2" Grid.Row="1">
-            <GridView x:ConnectionId='2' x:Name="ItemListView" ItemsSource="{Binding Path=Items}"                                              Margin="10,0,0,10" SelectionMode="Multiple">
+            <GridView x:ConnectionId='2' x:Name="ItemListView" HorizontalAlignment="Center" ItemsSource="{Binding Path=Items}"                                              Margin="10,10,0,0" SelectionMode="Multiple">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid HorizontalAlignment="Left" Width="200" Height="200" Margin="10,10,10,10">
+                        <Grid HorizontalAlignment="Left" Width="130" Height="130" Margin="10,10,10,10">
                             <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">
                                 <Image Source="/Assets/Logo.png" Stretch="UniformToFill" AutomationProperties.Name="{Binding Path=profit}"/>
                             </Border>
                             <StackPanel VerticalAlignment="Bottom" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
-                                <StackPanel Height="20" Orientation="Horizontal">
-                                    <TextBlock Width="50"/>
-                                    <TextBlock Text="Profit:" Width="80" TextAlignment="Left" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
-                                    <TextBlock Text="{Binding Path=profit}" Width="20" TextAlignment="Right" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
+                                <StackPanel Height="18" Orientation="Horizontal">
+                                    <TextBlock Width="30"/>
+                                    <TextBlock Text="Profit:" Width="48" FontSize="12" TextAlignment="Left" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
+                                    <TextBlock Text="{Binding Path=profit}" Width="20" FontSize="12" TextAlignment="Right" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Height="25" Orientation="Horizontal">
-                                    <TextBlock Width="50"/>
-                                    <TextBlock Text="Weight:" Width="80" TextAlignment="Left" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
-                                    <TextBlock Text="{Binding Path=weight}" Width="20" TextAlignment="Right" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
+                                    <TextBlock Width="30"/>
+                                    <TextBlock Text="Weight:" Width="48" FontSize="12" TextAlignment="Left" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
+                                    <TextBlock Text="{Binding Path=weight}" Width="20" FontSize="12" TextAlignment="Right" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <Button x:ConnectionId='3' Content="Submit" Margin="599,496,0,0"                Width="150" Height="60" FontSize="24" />
-            <ProgressBar x:Name="progress_main" Minimum="0" Maximum="100" Height="10" Foreground="Green" Value="0" Margin="200,497,600,81"/>
-            <ProgressBar x:Name="progress_total" Minimum="0" Maximum="100" Height="10" Foreground="Red" Value="0" Margin="679,497,121,81"/>
+            <StackPanel Margin="0,375,0,0" Height="30" Orientation="Horizontal">
+                <TextBlock x:Name="start" Margin="195,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
+                <TextBlock x:Name="mid" Margin="455,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
+                <TextBlock x:Name="end" Margin="470,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                <Button x:ConnectionId='3' Content="Submit"                Width="150" Height="60" FontSize="24" />
+            </StackPanel>
+            <ProgressBar x:Name="progress_main" Minimum="0" Maximum="100" Height="20" Foreground="Green" Value="0" Margin="200,497,600,81"/>
+            <ProgressBar x:Name="progress_total" Minimum="0" Maximum="100" Height="20" Foreground="Red" Value="0" Margin="679,497,121,81"/>
         </Grid>
     </Grid>
 </Page>

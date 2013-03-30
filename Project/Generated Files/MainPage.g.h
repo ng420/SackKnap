@@ -39,6 +39,9 @@ namespace Project
         private: ::Windows::UI::Xaml::Controls::GridView^ ItemListView;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ progress_main;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ progress_total;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ start;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ mid;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ end;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1B;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1C;
