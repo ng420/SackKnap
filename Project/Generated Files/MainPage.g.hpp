@@ -44,6 +44,8 @@ void ::Project::MainPage::InitializeComponent()
     WeightBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"WeightBlock"));
     // Get the TextBlock named 'ProfitBlock'
     ProfitBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ProfitBlock"));
+    // Get the TextBlock named 'Timer'
+    Timer = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Timer"));
     // Get the TextBlock named 'Minimum'
     Minimum = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Minimum"));
     // Get the TextBlock named 'Bronze'

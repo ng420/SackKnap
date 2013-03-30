@@ -41,16 +41,21 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 void MainPage::PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	ObjGrp->Profit="0";
-	ObjGrp->Weight="0";
+	Initialize();	
+}
+void MainPage::Initialize()
+{
 	InitializeObjects();
 	AnalyzeObjects();
-	ObjGrp->Time="0:00";
-	this->DataContext = ObjGrp;
 	StartTimerAndRegisterHandler();
+	this->DataContext = ObjGrp;
 }
 void MainPage::InitializeObjects()
 {
+		IsPaused=false;
+	ObjGrp->Time="0:00";
+	ObjGrp->Profit="0";
+	ObjGrp->Weight="0";
 	ObjGrp->Capacity="25";
 	AddObject("6","2");
 	AddObject("10","4");
@@ -226,28 +231,48 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		S="Capacity exceeded! Try Again.";
 	}
 	auto flyout = ref new MessageDialog("",S);
-	  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
-    {
-        //rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
-		Result->Text="Try Again was selected";
+	if(PassToNextLevel)
+	{
+		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Try Again was selected";
+			ObjGrp->Items->Clear();
+			InitializeObjects();
+			ItemListView->SelectedItems->Clear();
+			//Initialize();
+			
+		})));
+	  
+		  flyout->Commands->Append(ref new UICommand("Continue", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Install updates' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Continue was selected";
+		})));
+
+		  flyout->DefaultCommandIndex = 0;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 0;
+	}
+	else
+	{
+		 flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Try Again was selected";
+			IsPaused=false;
 		
-    })));
-	  if(PassToNextLevel)
-	  flyout->Commands->Append(ref new UICommand("Continue", ref new UICommandInvokedHandler([this](IUICommand^ command)
-    {
-        //rootPage->NotifyUser("The 'Install updates' command has been selected.", NotifyType::StatusMessage);
-		Result->Text="Continue was selected";
-    })));
-
-	  flyout->DefaultCommandIndex = 0;
-    // Set the command to be invoked when escape is pressed
-	  flyout->CancelCommandIndex = 0;
-
+		})));
+		 flyout->DefaultCommandIndex = 0;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 0;
+	}
+	IsPaused=true;
 	flyout->ShowAsync();
 }
 void Project::MainPage::StartTimerAndRegisterHandler()
 {
-	DispatcherTimer^ timer = ref new Windows::UI::Xaml::DispatcherTimer;
+	DispatcherTimer^ timer=ref new DispatcherTimer();
     TimeSpan ts;
     ts.Duration = 10000000;
     timer->Interval = ts;
@@ -276,7 +301,7 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	{
 		seconds=0;
 		minutes+=1;
-	}
+ 	}
 	char tim[3],tis[3];
 	_itoa_s(minutes,tim,10);
 	_itoa_s(seconds,tis,10);
@@ -288,6 +313,8 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	const wchar_t* ws_char = wids_str.c_str();
 	Platform::String^ m_string = ref new Platform::String(wm_char);
 	Platform::String^ s_string = ref new Platform::String(ws_char);
-	ObjGrp->Time=m_string+":"+s_string;
+	if(!IsPaused) 
+		ObjGrp->Time=(seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string);
 	Timer->Text=ObjGrp->Time;
-}
+ }
+
