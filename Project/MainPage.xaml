@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="Project.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="PageLoadedHandler">
+    <Grid Name="Grid0" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Name="Grid1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+            <Grid Name="Grid1B" Grid.Column="1">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="15,25,0,0">
+                        <TextBlock Text="Deadline: " FontSize="24"  TextWrapping="Wrap" Width="300"/>
+                        <TextBlock Text=" $100" FontSize="24" x:Name="DeadLine"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Gold: " FontSize="24" Margin="15,0,0,0" Width="300"/>
+                        <TextBlock Text="{Binding Path=Gold}" FontSize="24" x:Name="Gold" ></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Silver: " FontSize="24" Margin="15,0,0,0" Width="300"/>
+                        <TextBlock Text="{Binding Path=Silver}" FontSize="24" x:Name="Silver" ></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Bronze: " FontSize="24" Margin="15,0,0,0" Width="300"/>
+                        <TextBlock Text="{Binding Path=Bronze}" FontSize="24" x:Name="Bronze" ></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Name="Grid1C" Grid.Column="2">
+                <StackPanel>
+                    <TextBlock Text="Time Elapsed : 7:40" FontSize="24" Margin="15,25,0,0" TextWrapping="Wrap" TextAlignment="Center" />
+                    <TextBlock x:Name="ProfitBlock" Text="{Binding Path=Profit}" FontSize="16" Margin="15,0,0,0"/>
+                    <TextBlock x:Name="WeightBlock" Text="{Binding Path=Weight}" FontSize="16" Margin="15,0,0,0"/>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock x:Name="TitleText" Text="Level X"
+            VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0"/>
+        </Grid>
+        <Grid Name="grid2" Grid.Row="1">
+            <GridView x:Name="ItemListView" ItemsSource="{Binding Path=Items}" SelectionChanged="ItemView_SelectionChanged" Margin="10,0,0,10" SelectionMode="Multiple">
+    <GridView.ItemTemplate>
+        <DataTemplate>
+            <StackPanel>
+                <TextBlock  Text="{Binding Path=profit}" FontSize="16" Margin="15,0,0,0"/>
+                <TextBlock  Text="{Binding Path=weight}" FontSize="16" Margin="15,0,0,0"/>
+            </StackPanel>
+         </DataTemplate>
+    </GridView.ItemTemplate>
+</GridView>
+        </Grid>
+    </Grid>
+</Page>
