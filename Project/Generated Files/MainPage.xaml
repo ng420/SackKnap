@@ -47,8 +47,8 @@
                 <Grid Name="Grid1C" Grid.Column="2">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="15,25,0,0">
-                            <TextBlock Text="Elapsed Time:" TextAlignment="Center" FontSize="24"/>
-                            <TextBlock x:Name="Timer" Text="{Binding Path=Timer}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0"/>
+                            <TextBlock Text="Elapsed Time:" TextAlignment="Center" FontSize="24" Foreground="White"/>
+                            <TextBlock x:Name="Timer" Text="{Binding Path=Timer}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" Foreground="White"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
