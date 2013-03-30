@@ -48,11 +48,15 @@ void MainPage::PageLoadedHandler(Platform::Object^ sender,
 }
 void MainPage::InitializeObjects()
 {
-	ObjGrp->Capacity="11";
+	ObjGrp->Capacity="25";
 	AddObject("6","2");
 	AddObject("10","4");
 	AddObject("12","6");
 	AddObject("13","7");
+	AddObject("18","9");
+	AddObject("20","10");
+	AddObject("11","5");
+	AddObject("7","3");
 }
 Platform::String^ Project::MainPage::conv(Platform::String^ S1, Platform::String^ S2)
 {
