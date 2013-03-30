@@ -128,9 +128,11 @@ void MainPage::AnalyzeObjects()
 		while(temp==*lit && lit!=l.end())
 			lit++;
 		ObjGrp->Silver=ConvertToPString(*lit);
+		temp=*lit;
 		while(temp==*lit && lit!=l.end())
 			lit++;
 		ObjGrp->Bronze=ConvertToPString(*lit);
+		temp=*lit;
 		while(temp==*lit && lit!=l.end())
 			lit++;
 		ObjGrp->Minimum=ConvertToPString(*lit);
