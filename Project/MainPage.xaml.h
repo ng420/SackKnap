@@ -42,6 +42,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 	public:
 		void AnalyzeObjects();
 		void ProfitEval(unsigned int i);
+		void Initialize();
 		int ConvertToInt(Platform::String^ initial);
 		Platform::String^ ConvertToPString(int val);
 	private:

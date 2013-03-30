@@ -41,16 +41,19 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 void MainPage::PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	ObjGrp->Profit="0";
-	ObjGrp->Weight="0";
+	Initialize();	
+}
+void MainPage::Initialize()
+{
 	InitializeObjects();
 	AnalyzeObjects();
-	ObjGrp->Time="0:00";
 	this->DataContext = ObjGrp;
-	
 }
 void MainPage::InitializeObjects()
 {
+	ObjGrp->Time="0:00";
+	ObjGrp->Profit="0";
+	ObjGrp->Weight="0";
 	ObjGrp->Capacity="25";
 	AddObject("6","2");
 	AddObject("10","4");
@@ -190,6 +193,7 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	int bronze = ConvertToInt(Bronze->Text);
 	int minimum = ConvertToInt(Minimum->Text);
 	int capacity = ConvertToInt(Capacity->Text);
+	bool PassToNextLevel=false;
 	Point P(10,10);
 	Platform::String^ S;
 
@@ -198,28 +202,68 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		if (profit>=gold)
 		{
 			S="Congrats! You got gold.";
+			PassToNextLevel=true;
 		}
 		else if (profit>=silver)
 		{
+			PassToNextLevel=true;
 			S="You got silver.";
 		}
 		else if (profit>=bronze)
 		{
+			PassToNextLevel=true;
 			S="You got bronze.";
 		}
 		else if (profit>=minimum)
 		{
+			PassToNextLevel=true;
 			S="You passed the level.";
 		}
 		else
 		{
-			S="You did not reach the Minimum Required Profit.Try Again";
+			S="You did not reach the Minimum Required Profit.Try Again.";
 		}
 	}
 	else
 	{
 		S="Capacity exceeded! Try Again.";
 	}
-	auto flyout = ref new MessageDialog(S);
+	auto flyout = ref new MessageDialog("",S);
+	if(PassToNextLevel)
+	{
+		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Try Again was selected";
+			ObjGrp->Items->Clear();
+			InitializeObjects();
+			ItemListView->SelectedItems->Clear();
+			//Initialize();
+			
+		})));
+	  
+		  flyout->Commands->Append(ref new UICommand("Continue", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Install updates' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Continue was selected";
+		})));
+
+		  flyout->DefaultCommandIndex = 0;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 0;
+	}
+	else
+	{
+		 flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Try Again was selected";
+		
+		})));
+		 flyout->DefaultCommandIndex = 0;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 0;
+	}
+
 	flyout->ShowAsync();
 }
