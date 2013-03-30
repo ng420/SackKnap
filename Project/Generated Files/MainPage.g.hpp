@@ -40,14 +40,18 @@ void ::Project::MainPage::InitializeComponent()
     ProfitBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ProfitBlock"));
     // Get the TextBlock named 'WeightBlock'
     WeightBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"WeightBlock"));
+    // Get the TextBlock named 'Result'
+    Result = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Result"));
+    // Get the TextBlock named 'Capacity'
+    Capacity = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Capacity"));
+    // Get the TextBlock named 'Minimum'
+    Minimum = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Minimum"));
     // Get the TextBlock named 'Bronze'
     Bronze = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Bronze"));
     // Get the TextBlock named 'Silver'
     Silver = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Silver"));
     // Get the TextBlock named 'Gold'
     Gold = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Gold"));
-    // Get the TextBlock named 'DeadLine'
-    DeadLine = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"DeadLine"));
 }
 
 void ::Project::MainPage::Connect(int connectionId, Platform::Object^ target)
@@ -61,6 +65,10 @@ void ::Project::MainPage::Connect(int connectionId, Platform::Object^ target)
     case 2:
         (safe_cast<::Windows::UI::Xaml::Controls::Primitives::Selector^>(target))->SelectionChanged +=
             ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::Project::MainPage::*)(Platform::Object^, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&MainPage::ItemView_SelectionChanged);
+        break;
+    case 3:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Project::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Submit);
         break;
     }
     (void)connectionId; // Unused parameter

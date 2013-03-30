@@ -44,5 +44,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 		void ProfitEval(unsigned int i);
 		int ConvertToInt(Platform::String^ initial);
 		Platform::String^ ConvertToPString(int val);
+	private:
+		void Submit(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

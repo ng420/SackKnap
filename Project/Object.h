@@ -26,6 +26,7 @@ namespace Project
 		property Platform::String^ Gold;
 		property Platform::String^ Silver;
 		property Platform::String^ Bronze;
+		property Platform::String^ Minimum;
 		ObjectsGroup()
 		{
 			group = ref new Platform::Collections::Vector<Objects^>();

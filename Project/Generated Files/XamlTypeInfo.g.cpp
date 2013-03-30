@@ -109,6 +109,7 @@
                 return ref new ::Project::ObjectsGroup(); 
             };
         userType->AddMemberName(L"Items");
+        userType->AddMemberName(L"Minimum");
         userType->AddMemberName(L"Bronze");
         userType->AddMemberName(L"Silver");
         userType->AddMemberName(L"Gold");
@@ -187,6 +188,25 @@
             };
 
         xamlMember->SetIsReadOnly();
+        return xamlMember;
+    }
+
+    if (longMemberName == L"Project.ObjectsGroup.Minimum")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlMember^ xamlMember = ref new ::XamlTypeInfo::InfoProvider::XamlMember(this, L"Minimum", L"String");
+        xamlMember->Getter =
+            [](Object^ instance) -> Object^
+            {
+                auto that = (::Project::ObjectsGroup^)instance;
+                return that->Minimum;
+            };
+
+        xamlMember->Setter =
+            [](Object^ instance, Object^ value) -> void
+            {
+                auto that = (::Project::ObjectsGroup^)instance;
+                that->Minimum = (::Platform::String^)value;
+            };
         return xamlMember;
     }
 

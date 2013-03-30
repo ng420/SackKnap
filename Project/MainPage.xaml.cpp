@@ -125,9 +125,14 @@ void MainPage::AnalyzeObjects()
 		lit=l.begin();
 		ObjGrp->Gold=ConvertToPString(*lit);
 		lit++;
+		lit++;
 		ObjGrp->Silver=ConvertToPString(*lit);
 		lit++;
+		lit++;
 		ObjGrp->Bronze=ConvertToPString(*lit);
+		lit++;
+		lit++;
+		ObjGrp->Minimum=ConvertToPString(*lit);
 	}
 Platform::String^ MainPage::ConvertToPString(int val)
 	{
@@ -167,4 +172,40 @@ void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Wind
 		ProfitBlock->Text=ObjGrp->Profit;
 		WeightBlock->Text=ObjGrp->Weight;
 	
+}
+
+
+void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	int profit = ConvertToInt(ProfitBlock->Text);
+	int weight = ConvertToInt(WeightBlock->Text);
+	int gold = ConvertToInt(Gold->Text);
+	int silver = ConvertToInt(Silver->Text);
+	int bronze = ConvertToInt(Bronze->Text);
+	int minimum = ConvertToInt(Minimum->Text);
+	int capacity = ConvertToInt(Capacity->Text);
+
+	if (weight<=capacity)
+	{
+		if (profit>=gold)
+		{
+			Result->Text="Congrats! You got gold.";
+		}
+		else if (profit>=silver)
+		{
+			Result->Text="You got silver.";
+		}
+		else if (profit>=bronze)
+		{
+			Result->Text="You got bronze.";
+		}
+		else if (profit>=minimum)
+		{
+			Result->Text="You passed the level.";
+		}
+	}
+	else
+	{
+		Result->Text="Capacity exceeded! Try Again.";
+	}
 }
