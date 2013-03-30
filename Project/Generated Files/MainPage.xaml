@@ -13,7 +13,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Name="Grid1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        
+            
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="3*" />
@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
             <Grid Name="Grid1B" Grid.Column="1">
                 <StackPanel>
-
+                    
                     <StackPanel Orientation="Horizontal" Margin="15,25,0,0">
                         <TextBlock Text="Gold: " FontSize="24" Width="300"/>
                         <TextBlock Text="{Binding Path=Gold}" FontSize="24" x:Name="Gold" ></TextBlock>
@@ -66,23 +66,27 @@
             <GridView x:ConnectionId='2' x:Name="ItemListView" ItemsSource="{Binding Path=Items}"                                              Margin="10,0,0,10" SelectionMode="Multiple">
     <GridView.ItemTemplate>
         <DataTemplate>
-            <Border Background="LightGray" Height="200" Width="200">
-                <StackPanel Height="200" Width="200">
-                    <TextBlock Height="140"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Width="100" Text="Profit:" TextAlignment="Center" FontSize="20" Margin="0,0,0,0"/>
-                        <TextBlock Width="100" Text="{Binding Path=profit}" TextAlignment="Center" FontSize="20" Margin="0,0,0,0"/>
+            <Grid HorizontalAlignment="Left" Width="200" Height="200">
+                <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">
+                    <Image Source="/Assets/Logo.png" Stretch="UniformToFill" AutomationProperties.Name="{Binding Path=profit}"/>
+                </Border>
+                <StackPanel VerticalAlignment="Bottom" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
+                    <StackPanel Height="20" Orientation="Horizontal">
+                        <TextBlock Width="50"/>
+                        <TextBlock Text="Profit:" Width="80" TextAlignment="Left" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
+                        <TextBlock Text="{Binding Path=profit}" Width="20" TextAlignment="Right" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Width="100" Text="Weight:" TextAlignment="Center" FontSize="20" Margin="0,0,0,0"/>
-                        <TextBlock Width="100" Text="{Binding Path=weight}" TextAlignment="Center" FontSize="20" Margin="0,0,0,0"/>
+                    <StackPanel Height="25" Orientation="Horizontal">
+                        <TextBlock Width="50"/>
+                        <TextBlock Text="Weight:" Width="80" TextAlignment="Left" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
+                        <TextBlock Text="{Binding Path=weight}" Width="20" TextAlignment="Right" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,0"/>
                     </StackPanel>
                 </StackPanel>
-            </Border>
+            </Grid>
         </DataTemplate>
     </GridView.ItemTemplate>
 </GridView>
-            <Button x:ConnectionId='3' Content="Submit" HorizontalAlignment="Left" Margin="1142,439,0,0" VerticalAlignment="Top"                />
+            <Button x:ConnectionId='3' Content="Submit" HorizontalAlignment="Left" Margin="599,496,0,0" VerticalAlignment="Top"                />
         </Grid>
     </Grid>
 </Page>
