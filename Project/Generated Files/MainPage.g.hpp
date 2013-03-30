@@ -24,18 +24,18 @@ void ::Project::MainPage::InitializeComponent()
 
     // Get the Grid named 'Grid0'
     Grid0 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid0"));
-    // Get the Grid named 'Grid1'
-    Grid1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1"));
+    // Get the TextBlock named 'TitleText'
+    TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
     // Get the Grid named 'grid2'
     grid2 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"grid2"));
     // Get the GridView named 'ItemListView'
     ItemListView = safe_cast<::Windows::UI::Xaml::Controls::GridView^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ItemListView"));
+    // Get the Grid named 'Grid1'
+    Grid1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1"));
     // Get the Grid named 'Grid1B'
     Grid1B = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1B"));
     // Get the Grid named 'Grid1C'
     Grid1C = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1C"));
-    // Get the TextBlock named 'TitleText'
-    TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
     // Get the TextBlock named 'Result'
     Result = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Result"));
     // Get the TextBlock named 'Capacity'

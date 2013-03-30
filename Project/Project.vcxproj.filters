@@ -46,4 +46,13 @@
   <ItemGroup>
     <Page Include="MainPage.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Main.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Hud.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+
 </Project>
