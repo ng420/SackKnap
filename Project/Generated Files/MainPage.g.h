@@ -43,6 +43,7 @@ namespace Project
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Capacity;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ WeightBlock;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ ProfitBlock;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ Timer;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Minimum;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Bronze;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Silver;

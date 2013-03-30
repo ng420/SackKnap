@@ -32,6 +32,8 @@ void PageLoadedHandler(Platform::Object^ sender,
 		Platform::Collections::Vector<Objects^>^ ob;
 		void ItemView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 		Platform::String^ conv(Platform::String^ S1,Platform::String^ S2);
+		void StartTimerAndRegisterHandler();
+		void OnTick(Object^ sender,Object^ e);
 		void InitializeObjects();
 		void AddObject(Platform::String^ profit,Platform::String^ weight)
 		{
