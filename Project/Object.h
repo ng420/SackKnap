@@ -20,6 +20,7 @@ namespace Project
 		private:
 			Windows::Foundation::Collections::IVector<Objects^>^ group;
 	public:
+		property Platform::String^ Time;
 		property Platform::String^ Profit;
 		property Platform::String^ Capacity;
 		property Platform::String^ Weight;

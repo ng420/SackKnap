@@ -13,12 +13,14 @@ using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::UI::Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -39,15 +41,21 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 void MainPage::PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	ObjGrp->Profit="0";
-	ObjGrp->Weight="0";
+	Initialize();	
+}
+void MainPage::Initialize()
+{
 	InitializeObjects();
 	AnalyzeObjects();
+	StartTimerAndRegisterHandler();
 	this->DataContext = ObjGrp;
-	
 }
 void MainPage::InitializeObjects()
 {
+		IsPaused=false;
+	ObjGrp->Time="0:00";
+	ObjGrp->Profit="0";
+	ObjGrp->Weight="0";
 	ObjGrp->Capacity="25";
 	AddObject("6","2");
 	AddObject("10","4");
@@ -172,9 +180,23 @@ void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Wind
 		ObjGrp->Weight=conv(ObjGrp->Weight,ob->weight);
 	}
 
-		ProfitBlock->Text=ObjGrp->Profit;
-		WeightBlock->Text=ObjGrp->Weight;
-	
+	ProfitBlock->Text=ObjGrp->Profit;
+	WeightBlock->Text=ObjGrp->Weight;
+
+	progress_main->Value=min((ConvertToInt(ObjGrp->Weight)*100)/(ConvertToInt(ObjGrp->Capacity)),100);
+	int total_weight=0;
+	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
+	{
+		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+	}
+	if (ConvertToInt(ObjGrp->Weight)>ConvertToInt(ObjGrp->Capacity))
+	{
+		progress_total->Value=((ConvertToInt(ObjGrp->Weight)-ConvertToInt(ObjGrp->Capacity))*100)/(total_weight-ConvertToInt(ObjGrp->Capacity));
+	}
+	else
+	{
+		progress_total->Value=0;
+	}
 }
 
 
@@ -187,28 +209,126 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	int bronze = ConvertToInt(Bronze->Text);
 	int minimum = ConvertToInt(Minimum->Text);
 	int capacity = ConvertToInt(Capacity->Text);
+	bool PassToNextLevel=false;
+	Point P(10,10);
+	Platform::String^ S;
 
 	if (weight<=capacity)
 	{
 		if (profit>=gold)
 		{
-			Result->Text="Congrats! You got gold.";
+			S="Congrats! You got gold.";
+			PassToNextLevel=true;
 		}
 		else if (profit>=silver)
 		{
-			Result->Text="You got silver.";
+			PassToNextLevel=true;
+			S="You got silver.";
 		}
 		else if (profit>=bronze)
 		{
-			Result->Text="You got bronze.";
+			PassToNextLevel=true;
+			S="You got bronze.";
 		}
 		else if (profit>=minimum)
 		{
-			Result->Text="You passed the level.";
+			PassToNextLevel=true;
+			S="You passed the level.";
+		}
+		else
+		{
+			S="You did not reach the Minimum Required Profit.Try Again.";
 		}
 	}
 	else
 	{
-		Result->Text="Capacity exceeded! Try Again.";
+		S="Capacity exceeded! Try Again.";
 	}
+	auto flyout = ref new MessageDialog("",S);
+	if(PassToNextLevel)
+	{
+		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Try Again was selected";
+			ObjGrp->Items->Clear();
+			InitializeObjects();
+			ItemListView->SelectedItems->Clear();
+			//Initialize();
+			
+		})));
+	  
+		  flyout->Commands->Append(ref new UICommand("Continue", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Install updates' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Continue was selected";
+		})));
+
+		  flyout->DefaultCommandIndex = 0;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 0;
+	}
+	else
+	{
+		 flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
+			Result->Text="Try Again was selected";
+			IsPaused=false;
+		
+		})));
+		 flyout->DefaultCommandIndex = 0;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 0;
+	}
+	IsPaused=true;
+	flyout->ShowAsync();
 }
+void Project::MainPage::StartTimerAndRegisterHandler()
+{
+	DispatcherTimer^ timer=ref new DispatcherTimer();
+    TimeSpan ts;
+    ts.Duration = 10000000;
+    timer->Interval = ts;
+    timer->Start();
+	timer->Tick += ref new EventHandler<Object^>(this,&Project::MainPage::OnTick);
+}
+void Project::MainPage::OnTick(Object^ sender,Object^ e)
+{   
+	Platform::String^ time = ObjGrp->Time;
+	const wchar_t* T = time->Data();
+	char second[3],minute[3];
+	int i;
+	int Size = wcslen(T);
+	char *CString= new char[Size + 1];
+	for(i=0;i<Size;i++)
+	{
+		CString[i] = (char)T[i];
+	}
+	minute[0]=CString[0];
+	for(i=2;i<Size;i++)
+		second[i-2]=CString[i];
+	int seconds=atoi(second);
+	int minutes=atoi(minute);
+	seconds += 1;
+	if(seconds==60)
+	{
+		seconds=0;
+		minutes+=1;
+ 	}
+	char tim[3],tis[3];
+	_itoa_s(minutes,tim,10);
+	_itoa_s(seconds,tis,10);
+	std::string m_str = std::string(tim);
+	std::string s_str = std::string(tis);
+	std::wstring widm_str = std::wstring(m_str.begin(), m_str.end());
+	std::wstring wids_str = std::wstring(s_str.begin(), s_str.end());
+	const wchar_t* wm_char = widm_str.c_str();
+	const wchar_t* ws_char = wids_str.c_str();
+	Platform::String^ m_string = ref new Platform::String(wm_char);
+	Platform::String^ s_string = ref new Platform::String(ws_char);
+	if(!IsPaused) 
+		ObjGrp->Time=(seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string);
+	Timer->Text=ObjGrp->Time;
+ }
+

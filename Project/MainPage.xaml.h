@@ -19,11 +19,14 @@ namespace Project
 	{
 	public:
 		MainPage();
+		
 
 	protected:
 		virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 	private: 
 		int w,p;
+		bool IsPaused;
+
 void PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e);
 		ObjectsGroup^ ObjGrp;
@@ -41,7 +44,10 @@ void PageLoadedHandler(Platform::Object^ sender,
 		}
 	public:
 		void AnalyzeObjects();
+		void StartTimerAndRegisterHandler();
+		void OnTick(Object^ sender,Object^ e);
 		void ProfitEval(unsigned int i);
+		void Initialize();
 		int ConvertToInt(Platform::String^ initial);
 		Platform::String^ ConvertToPString(int val);
 	private:
