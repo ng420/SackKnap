@@ -124,14 +124,15 @@ void MainPage::AnalyzeObjects()
 		l.reverse();
 		lit=l.begin();
 		ObjGrp->Gold=ConvertToPString(*lit);
-		lit++;
-		lit++;
+		int temp=*lit;
+		while(temp==*lit && lit!=l.end())
+			lit++;
 		ObjGrp->Silver=ConvertToPString(*lit);
-		lit++;
-		lit++;
+		while(temp==*lit && lit!=l.end())
+			lit++;
 		ObjGrp->Bronze=ConvertToPString(*lit);
-		lit++;
-		lit++;
+		while(temp==*lit && lit!=l.end())
+			lit++;
 		ObjGrp->Minimum=ConvertToPString(*lit);
 	}
 Platform::String^ MainPage::ConvertToPString(int val)

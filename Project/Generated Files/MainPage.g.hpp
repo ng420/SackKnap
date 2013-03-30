@@ -36,14 +36,14 @@ void ::Project::MainPage::InitializeComponent()
     Grid1C = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1C"));
     // Get the TextBlock named 'TitleText'
     TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
-    // Get the TextBlock named 'ProfitBlock'
-    ProfitBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ProfitBlock"));
-    // Get the TextBlock named 'WeightBlock'
-    WeightBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"WeightBlock"));
     // Get the TextBlock named 'Result'
     Result = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Result"));
     // Get the TextBlock named 'Capacity'
     Capacity = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Capacity"));
+    // Get the TextBlock named 'WeightBlock'
+    WeightBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"WeightBlock"));
+    // Get the TextBlock named 'ProfitBlock'
+    ProfitBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ProfitBlock"));
     // Get the TextBlock named 'Minimum'
     Minimum = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Minimum"));
     // Get the TextBlock named 'Bronze'
