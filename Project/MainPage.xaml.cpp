@@ -52,8 +52,8 @@ void MainPage::Initialize()
 }
 void MainPage::InitializeObjects()
 {
-		IsPaused=false;
-	ObjGrp->Time="0:00";
+	IsPaused=false;
+	ObjGrp->Time="00:00";
 	ObjGrp->Profit="0";
 	ObjGrp->Weight="0";
 	ObjGrp->Capacity="25";
@@ -291,9 +291,10 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	{
 		CString[i] = (char)T[i];
 	}
-	minute[0]=CString[0];
-	for(i=2;i<Size;i++)
-		second[i-2]=CString[i];
+	for(i=0;i<2;i++)
+		minute[i]=CString[i];
+	for(i=3;i<Size;i++)
+		second[i-3]=CString[i];
 	int seconds=atoi(second);
 	int minutes=atoi(minute);
 	seconds += 1;
@@ -314,7 +315,7 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	Platform::String^ m_string = ref new Platform::String(wm_char);
 	Platform::String^ s_string = ref new Platform::String(ws_char);
 	if(!IsPaused) 
-		ObjGrp->Time=(seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string);
+		ObjGrp->Time=(minutes>=10)?((seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string)):((seconds>=10)?("0"+m_string+":"+s_string):("0"+m_string+":0"+s_string));
 	Timer->Text=ObjGrp->Time;
  }
 
