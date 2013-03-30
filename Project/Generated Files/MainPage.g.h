@@ -33,9 +33,9 @@ namespace Project
         bool _contentLoaded;
     
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid0;
-        private: ::Windows::UI::Xaml::Controls::Grid^ Grid1;
         private: ::Windows::UI::Xaml::Controls::Grid^ grid2;
         private: ::Windows::UI::Xaml::Controls::GridView^ ItemListView;
+        private: ::Windows::UI::Xaml::Controls::Grid^ Grid1;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1B;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1C;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ TitleText;
