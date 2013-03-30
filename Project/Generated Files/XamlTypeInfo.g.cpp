@@ -116,7 +116,6 @@
         userType->AddMemberName(L"Weight");
         userType->AddMemberName(L"Capacity");
         userType->AddMemberName(L"Profit");
-        userType->AddMemberName(L"Time");
         userType->SetIsBindable();
         return userType;
     }
@@ -321,25 +320,6 @@
             {
                 auto that = (::Project::ObjectsGroup^)instance;
                 that->Profit = (::Platform::String^)value;
-            };
-        return xamlMember;
-    }
-
-    if (longMemberName == L"Project.ObjectsGroup.Time")
-    {
-        ::XamlTypeInfo::InfoProvider::XamlMember^ xamlMember = ref new ::XamlTypeInfo::InfoProvider::XamlMember(this, L"Time", L"String");
-        xamlMember->Getter =
-            [](Object^ instance) -> Object^
-            {
-                auto that = (::Project::ObjectsGroup^)instance;
-                return that->Time;
-            };
-
-        xamlMember->Setter =
-            [](Object^ instance, Object^ value) -> void
-            {
-                auto that = (::Project::ObjectsGroup^)instance;
-                that->Time = (::Platform::String^)value;
             };
         return xamlMember;
     }

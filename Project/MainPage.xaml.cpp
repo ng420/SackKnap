@@ -13,14 +13,12 @@ using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
-using namespace Windows::UI::Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -45,7 +43,6 @@ void MainPage::PageLoadedHandler(Platform::Object^ sender,
 	ObjGrp->Weight="0";
 	InitializeObjects();
 	AnalyzeObjects();
-	ObjGrp->Time="0:00";
 	this->DataContext = ObjGrp;
 	
 }
@@ -190,36 +187,28 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	int bronze = ConvertToInt(Bronze->Text);
 	int minimum = ConvertToInt(Minimum->Text);
 	int capacity = ConvertToInt(Capacity->Text);
-	Point P(10,10);
-	Platform::String^ S;
 
 	if (weight<=capacity)
 	{
 		if (profit>=gold)
 		{
-			S="Congrats! You got gold.";
+			Result->Text="Congrats! You got gold.";
 		}
 		else if (profit>=silver)
 		{
-			S="You got silver.";
+			Result->Text="You got silver.";
 		}
 		else if (profit>=bronze)
 		{
-			S="You got bronze.";
+			Result->Text="You got bronze.";
 		}
 		else if (profit>=minimum)
 		{
-			S="You passed the level.";
-		}
-		else
-		{
-			S="You did not reach the Minimum Required Profit.Try Again";
+			Result->Text="You passed the level.";
 		}
 	}
 	else
 	{
-		S="Capacity exceeded! Try Again.";
+		Result->Text="Capacity exceeded! Try Again.";
 	}
-	auto flyout = ref new MessageDialog(S);
-	flyout->ShowAsync();
 }
