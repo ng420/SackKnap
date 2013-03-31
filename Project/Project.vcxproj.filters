@@ -84,15 +84,13 @@
   <ItemGroup>
     <Page Include="MainPage.xaml" />
     <Page Include="MenuPage.xaml" />
+    <Page Include="GlassButton.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Main.png">
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\Hud.png">
-      <Filter>Assets</Filter>
-    </Image>
-    <Image Include="Assets\background.jpg">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
