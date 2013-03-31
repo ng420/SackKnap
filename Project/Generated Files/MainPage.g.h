@@ -13,9 +13,9 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class Grid;
-                ref class TextBlock;
                 ref class GridView;
                 ref class ProgressBar;
+                ref class TextBlock;
             }
         }
     }
@@ -34,7 +34,6 @@ namespace Project
         bool _contentLoaded;
     
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid0;
-        private: ::Windows::UI::Xaml::Controls::TextBlock^ TitleText;
         private: ::Windows::UI::Xaml::Controls::Grid^ grid2;
         private: ::Windows::UI::Xaml::Controls::GridView^ ItemListView;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ progress_main;
@@ -42,6 +41,8 @@ namespace Project
         private: ::Windows::UI::Xaml::Controls::TextBlock^ start;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ mid;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ end;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ TitleText;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ LevelText;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1B;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1C;

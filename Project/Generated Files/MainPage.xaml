@@ -68,10 +68,12 @@
                 </Grid>
             </Grid>
         </Border>
-
-        <TextBlock x:Name="TitleText" Text="Level X"
+        <StackPanel Orientation="Horizontal">
+        <TextBlock x:Name="TitleText" Text="Level "
             VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" Foreground="White"/>
-
+            <TextBlock x:Name="LevelText" Text=""
+            VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" Foreground="White"/>
+        </StackPanel>
         <Grid Name="grid2" Grid.Row="1">
             <GridView x:ConnectionId='2' x:Name="ItemListView" HorizontalAlignment="Center" ItemsSource="{Binding Path=Items}"                                              Margin="10,10,0,0" SelectionMode="Multiple">
                 <GridView.ItemTemplate>
@@ -102,7 +104,7 @@
                 <TextBlock x:Name="end" Margin="470,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                <Button x:ConnectionId='3' Style="{StaticResource ResourceKey=GlassButton}" Content="Submit"                Width="150" Height="60" FontSize="24"/>
+                <Button x:ConnectionId='3' Content="Submit"                Width="150" Height="60" FontSize="24" />
             </StackPanel>
             <ProgressBar x:Name="progress_main" Minimum="0" Maximum="100" Height="20" Foreground="Green" Value="0" Margin="200,497,600,81"/>
             <ProgressBar x:Name="progress_total" Minimum="0" Maximum="100" Height="20" Foreground="Red" Value="0" Margin="679,497,121,81"/>

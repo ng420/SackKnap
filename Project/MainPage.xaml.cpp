@@ -46,19 +46,20 @@ void MainPage::PageLoadedHandler(Platform::Object^ sender,
 }
 void MainPage::Initialize()
 {
+	Level=1;
+	LevelText->Text=ConvertToPString(Level);
 	InitializeObjects();
 	AnalyzeObjects();
-	
 	StartTimerAndRegisterHandler();
 	this->DataContext = ObjGrp;
 }
 void MainPage::InitializeObjects()
 {
 		IsPaused=false;
-	ObjGrp->Time="0:00";
-	ObjGrp->Profit="0";
-	ObjGrp->Weight="0";
-	ObjectCreator(8);
+		ObjGrp->Time="0:00";
+		ObjGrp->Profit="0";
+		ObjGrp->Weight="0";
+		ObjectCreator(5+Level/2);
 }
 Platform::String^ Project::MainPage::conv(Platform::String^ S1, Platform::String^ S2)
 {
@@ -138,7 +139,7 @@ void MainPage::AnalyzeObjects()
 		while(temp==*lit && lit!=l.end())
 			lit++;
 		ObjGrp->Minimum=ConvertToPString(*lit);
-		Gold->Text=ObjGrp->Gold;
+	Gold->Text=ObjGrp->Gold;
 	Silver->Text=ObjGrp->Silver;
 	Bronze->Text=ObjGrp->Bronze;
 	Minimum->Text=ObjGrp->Minimum;
@@ -149,7 +150,7 @@ void MainPage::AnalyzeObjects()
 		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
 	}
 	end->Text=ConvertToPString(total_weight);
-
+	l.empty();
 	}
 Platform::String^ MainPage::ConvertToPString(int val)
 	{
@@ -257,7 +258,6 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	{
 		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
 		{
-			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
 			Result->Text="Try Again was selected";
 			ObjGrp->Items->Clear();
 			InitializeObjects();
@@ -271,11 +271,17 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		{
 			//rootPage->NotifyUser("The 'Install updates' command has been selected.", NotifyType::StatusMessage);
 			Result->Text="Continue was selected";
+			Level++;
+			LevelText->Text=ConvertToPString(Level);
+			ObjGrp->Items->Clear();
+			InitializeObjects();
+			AnalyzeObjects();
+			ItemListView->SelectedItems->Clear();
 		})));
 
-		  flyout->DefaultCommandIndex = 0;
+		  flyout->DefaultCommandIndex = 1;
 		// Set the command to be invoked when escape is pressed
-		  flyout->CancelCommandIndex = 0;
+		  flyout->CancelCommandIndex = 1;
 	}
 	else
 	{

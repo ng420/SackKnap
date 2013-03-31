@@ -22,12 +22,14 @@
         * Row 1 contains the rest of the page layout
     -->
     <Grid Style="{StaticResource LayoutRootStyle}">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Back button and page title -->
+        <Border BorderBrush="BlueViolet" BorderThickness="0,0,0,5">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -36,13 +38,14 @@
             <!---<Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>-->
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="SackKnap: The Game" Style="{StaticResource PageHeaderTextStyle}" HorizontalAlignment="Center"/>
         </Grid>
+        </Border>
         <Grid Grid.Row="1" HorizontalAlignment="Center">
             <StackPanel VerticalAlignment="Center">
-                <Button x:ConnectionId='1' Content="New Game" Width="250" Height="60" FontSize="24"                        />
-                <Button Content="Level Select" Width="250" Height="60" FontSize="24" />
-                <Button Content="Achievements" Width="250" Height="60" FontSize="24" />
-                <Button Content="Help" Width="250" Height="60" FontSize="24" />
-                <Button Content="About" Width="250" Height="60" FontSize="24" />
+                <Button x:ConnectionId='1' Content="New Game" Width="250" Height="60" FontSize="24"                        Background="Transparent" BorderBrush="Black" BorderThickness="2" />
+                <Button Content="Level Select" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
+                <Button Content="Achievements" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
+                <Button Content="Help" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
+                <Button Content="About" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
             </StackPanel>
         </Grid>
         <VisualStateManager.VisualStateGroups>
