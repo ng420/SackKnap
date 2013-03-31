@@ -20,13 +20,12 @@ namespace Project
 	public:
 		MainPage();
 		
-
 	protected:
 		virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 	private: 
 		int w,p;
 		bool IsPaused;
-
+		int Level;
 void PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e);
 		ObjectsGroup^ ObjGrp;

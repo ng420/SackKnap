@@ -168,6 +168,7 @@
     <None Include="Project_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\background.jpg" />
     <Image Include="Assets\Hud.png" />
     <Image Include="Assets\Logo.png" />
     <Image Include="Assets\Main.png" />

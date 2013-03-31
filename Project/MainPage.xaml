@@ -68,10 +68,12 @@
                 </Grid>
             </Grid>
         </Border>
-
-        <TextBlock x:Name="TitleText" Text="Level X"
+        <StackPanel Orientation="Horizontal">
+        <TextBlock x:Name="TitleText" Text="Level "
             VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" Foreground="White"/>
-
+            <TextBlock x:Name="LevelText" Text=""
+            VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" Foreground="White"/>
+        </StackPanel>
         <Grid Name="grid2" Grid.Row="1">
             <GridView x:Name="ItemListView" HorizontalAlignment="Center" ItemsSource="{Binding Path=Items}" SelectionChanged="ItemView_SelectionChanged" Margin="10,10,0,0" SelectionMode="Multiple">
                 <GridView.ItemTemplate>

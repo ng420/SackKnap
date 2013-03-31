@@ -24,8 +24,6 @@ void ::Project::MainPage::InitializeComponent()
 
     // Get the Grid named 'Grid0'
     Grid0 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid0"));
-    // Get the TextBlock named 'TitleText'
-    TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
     // Get the Grid named 'grid2'
     grid2 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"grid2"));
     // Get the GridView named 'ItemListView'
@@ -40,6 +38,10 @@ void ::Project::MainPage::InitializeComponent()
     mid = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"mid"));
     // Get the TextBlock named 'end'
     end = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"end"));
+    // Get the TextBlock named 'TitleText'
+    TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
+    // Get the TextBlock named 'LevelText'
+    LevelText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"LevelText"));
     // Get the Grid named 'Grid1'
     Grid1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1"));
     // Get the Grid named 'Grid1B'

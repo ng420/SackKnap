@@ -48,6 +48,7 @@
     <ClCompile Include="Common\SuspensionManager.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="MenuPage.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -72,6 +73,7 @@
     <ClInclude Include="Common\SuspensionManager.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="MenuPage.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -88,6 +90,9 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\Hud.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\background.jpg">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
