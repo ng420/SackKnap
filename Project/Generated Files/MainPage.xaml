@@ -102,7 +102,7 @@
                 <TextBlock x:Name="end" Margin="470,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                <Button x:ConnectionId='3' Content="Submit"                Width="150" Height="60" FontSize="24" />
+                <Button x:ConnectionId='3' Style="{StaticResource ResourceKey=GlassButton}" Content="Submit"                Width="150" Height="60" FontSize="24"/>
             </StackPanel>
             <ProgressBar x:Name="progress_main" Minimum="0" Maximum="100" Height="20" Foreground="Green" Value="0" Margin="200,497,600,81"/>
             <ProgressBar x:Name="progress_total" Minimum="0" Maximum="100" Height="20" Foreground="Red" Value="0" Margin="679,497,121,81"/>
