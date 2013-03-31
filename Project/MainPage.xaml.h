@@ -42,6 +42,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 			_obj1->weight=weight;
 			ObjGrp->Items->Append(_obj1);
 		}
+		void ObjectCreator(int t);
 	public:
 		void AnalyzeObjects();
 		void StartTimerAndRegisterHandler();

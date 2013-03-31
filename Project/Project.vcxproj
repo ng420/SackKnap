@@ -129,6 +129,15 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Common\BindableBase.h" />
+    <ClInclude Include="Common\BooleanNegationConverter.h" />
+    <ClInclude Include="Common\BooleanToVisibilityConverter.h" />
+    <ClInclude Include="Common\LayoutAwarePage.h" />
+    <ClInclude Include="Common\RichTextColumns.h" />
+    <ClInclude Include="Common\SuspensionManager.h" />
+    <ClInclude Include="MenuPage.xaml.h">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
@@ -146,6 +155,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MenuPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -167,8 +179,17 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="Common\BindableBase.cpp" />
+    <ClCompile Include="Common\BooleanNegationConverter.cpp" />
+    <ClCompile Include="Common\BooleanToVisibilityConverter.cpp" />
+    <ClCompile Include="Common\LayoutAwarePage.cpp" />
+    <ClCompile Include="Common\RichTextColumns.cpp" />
+    <ClCompile Include="Common\SuspensionManager.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="MenuPage.xaml.cpp">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -178,6 +199,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Common\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

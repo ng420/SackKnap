@@ -7,6 +7,7 @@
 #include "MainPage.xaml.h"
 #include "Object.h"
 #include <list>
+#include <time.h>
 using namespace Project;
 
 using namespace Platform;
@@ -47,16 +48,9 @@ void MainPage::Initialize()
 {
 	InitializeObjects();
 	AnalyzeObjects();
+	
 	StartTimerAndRegisterHandler();
 	this->DataContext = ObjGrp;
-
-	mid->Text=ObjGrp->Capacity;
-	int total_weight=0;
-	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
-	{
-		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
-	}
-	end->Text=ConvertToPString(total_weight);
 }
 void MainPage::InitializeObjects()
 {
@@ -64,15 +58,7 @@ void MainPage::InitializeObjects()
 	ObjGrp->Time="0:00";
 	ObjGrp->Profit="0";
 	ObjGrp->Weight="0";
-	ObjGrp->Capacity="25";
-	AddObject("6","2");
-	AddObject("10","4");
-	AddObject("12","6");
-	AddObject("13","7");
-	AddObject("18","9");
-	AddObject("20","10");
-	AddObject("11","5");
-	AddObject("7","3");
+	ObjectCreator(8);
 }
 Platform::String^ Project::MainPage::conv(Platform::String^ S1, Platform::String^ S2)
 {
@@ -152,6 +138,18 @@ void MainPage::AnalyzeObjects()
 		while(temp==*lit && lit!=l.end())
 			lit++;
 		ObjGrp->Minimum=ConvertToPString(*lit);
+		Gold->Text=ObjGrp->Gold;
+	Silver->Text=ObjGrp->Silver;
+	Bronze->Text=ObjGrp->Bronze;
+	Minimum->Text=ObjGrp->Minimum;
+	mid->Text=ObjGrp->Capacity;
+	int total_weight=0;
+	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
+	{
+		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+	}
+	end->Text=ConvertToPString(total_weight);
+
 	}
 Platform::String^ MainPage::ConvertToPString(int val)
 	{
@@ -205,6 +203,8 @@ void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Wind
 	{
 		progress_total->Value=0;
 	}
+
+	
 }
 
 
@@ -261,6 +261,7 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 			Result->Text="Try Again was selected";
 			ObjGrp->Items->Clear();
 			InitializeObjects();
+			AnalyzeObjects();
 			ItemListView->SelectedItems->Clear();
 			//Initialize();
 			
@@ -339,4 +340,32 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 		ObjGrp->Time=(seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string);
 	Timer->Text=ObjGrp->Time;
  }
+void MainPage::ObjectCreator(int t)
+{
+			float curRatio;
+			int wt,pt;
+			bool isValid=false;
+			srand(time(NULL));
+			auto ratio = float((200+rand()%200)/(100.0));
+			for(int i=0;i<t;i++)
+			{   isValid=false;
+				curRatio=((ratio*100)+rand()%200-100)/100;
+				while(!isValid)
+				{
+					isValid=true;
+					wt=10+rand()%20;
+					for(int j=0;j<i;j++)
+						if(wt==ConvertToInt(ObjGrp->Items->GetAt(j)->weight))
+						isValid=false;
+					pt=int(curRatio*(wt));
+				}
+				AddObject(ConvertToPString(pt),ConvertToPString(wt));
+			}
+			int c=0;
+			for(int i=0;i<t;i++)
+			c+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+			c=(c/2);
+			ObjGrp->Capacity=ConvertToPString(c);
+			Capacity->Text=ObjGrp->Capacity;
+}
 
