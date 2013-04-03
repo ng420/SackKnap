@@ -51,6 +51,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 		void OnTick(Object^ sender,Object^ e);
 		void ProfitEval(unsigned int i);
 		void Initialize();
+		void DisplayToast(Platform::String^ Header,Platform::String^ text);
 		int ConvertToInt(Platform::String^ initial);
 		Platform::String^ ConvertToPString(int val);
 	private:
