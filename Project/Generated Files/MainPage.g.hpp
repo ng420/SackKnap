@@ -24,18 +24,32 @@ void ::Project::MainPage::InitializeComponent()
 
     // Get the Grid named 'Grid0'
     Grid0 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid0"));
-    // Get the Grid named 'Grid1'
-    Grid1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1"));
     // Get the Grid named 'grid2'
     grid2 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"grid2"));
     // Get the GridView named 'ItemListView'
     ItemListView = safe_cast<::Windows::UI::Xaml::Controls::GridView^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ItemListView"));
+    // Get the ProgressBar named 'progress_main'
+    progress_main = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"progress_main"));
+    // Get the ProgressBar named 'progress_total'
+    progress_total = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"progress_total"));
+    // Get the TextBlock named 'start'
+    start = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"start"));
+    // Get the TextBlock named 'mid'
+    mid = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"mid"));
+    // Get the TextBlock named 'end'
+    end = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"end"));
+    // Get the Button named 'backButton'
+    backButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"backButton"));
+    // Get the TextBlock named 'TitleText'
+    TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
+    // Get the TextBlock named 'LevelText'
+    LevelText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"LevelText"));
+    // Get the Grid named 'Grid1'
+    Grid1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1"));
     // Get the Grid named 'Grid1B'
     Grid1B = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1B"));
     // Get the Grid named 'Grid1C'
     Grid1C = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Grid1C"));
-    // Get the TextBlock named 'TitleText'
-    TitleText = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"TitleText"));
     // Get the TextBlock named 'Result'
     Result = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Result"));
     // Get the TextBlock named 'Capacity'
@@ -71,6 +85,10 @@ void ::Project::MainPage::Connect(int connectionId, Platform::Object^ target)
     case 3:
         (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
             ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Project::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Submit);
+        break;
+    case 4:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Project::MainPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MainPage::GoBack);
         break;
     }
     (void)connectionId; // Unused parameter

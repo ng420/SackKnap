@@ -4,11 +4,11 @@
 //
 
 #pragma once
-
 #include "MainPage.g.h"
 #include "Object.h"
 #include <list>
 #include <vector>
+#include <map>
 
 namespace Project
 {
@@ -20,16 +20,18 @@ namespace Project
 	public:
 		MainPage();
 		
-
 	protected:
 		virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 	private: 
 		int w,p;
 		bool IsPaused;
-
+		int Level;
 void PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e);
 		ObjectsGroup^ ObjGrp;
+		int HighestLevelReached;
+		Windows::Storage::ApplicationDataContainer^ localSettings;
+		Platform::Array<int>^ medals;
 		std::list<int> l;
 		std::list<int>::iterator lit;
 		Platform::Collections::Vector<Objects^>^ ob;
@@ -42,6 +44,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 			_obj1->weight=weight;
 			ObjGrp->Items->Append(_obj1);
 		}
+		void ObjectCreator(int t);
 	public:
 		void AnalyzeObjects();
 		void StartTimerAndRegisterHandler();
@@ -52,5 +55,6 @@ void PageLoadedHandler(Platform::Object^ sender,
 		Platform::String^ ConvertToPString(int val);
 	private:
 		void Submit(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void GoBack(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }
