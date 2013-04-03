@@ -2,10 +2,11 @@
 // MainPage.xaml.cpp
 // Implementation of the MainPage class.
 //
-
+#pragma once
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "Object.h"
+#include "MenuPage.xaml.h"
 #include <list>
 #include <time.h>
 using namespace Project;
@@ -22,6 +23,7 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Popups;
+using namespace Windows::Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -47,6 +49,17 @@ void MainPage::PageLoadedHandler(Platform::Object^ sender,
 void MainPage::Initialize()
 {
 	Level=1;
+	localSettings = ApplicationData::Current->LocalSettings;
+	auto HighestLevelReach = safe_cast<String^>(localSettings->Values->Lookup("HighestLevelReached"));
+	//medals = safe_cast<Array<int>^>(localSettings->Values->Lookup("medals"));
+	medals = ref new Array<int>(30);
+	if(HighestLevelReach==nullptr) HighestLevelReached =1;
+	else HighestLevelReached=ConvertToInt(HighestLevelReach);
+	/*for(int i=0;i<HighestLevelReached;i++)
+	{
+		auto med = safe_cast<String^>(localSettings->Values->Lookup("medal"+ConvertToPString(i)));
+		medals[i]=ConvertToInt(med);
+	}*/
 	LevelText->Text=ConvertToPString(Level);
 	InitializeObjects();
 	AnalyzeObjects();
@@ -113,6 +126,7 @@ void MainPage::AnalyzeObjects()
 	{
 		w=0;p=0;
 		int c;
+		l.clear();
 		ob = ref new Platform::Collections::Vector<Objects^>();
 		for(unsigned int i=0;i<ObjGrp->Items->Size;i++)
 			ob->Append(ObjGrp->Items->GetAt(i));
@@ -143,14 +157,6 @@ void MainPage::AnalyzeObjects()
 	Silver->Text=ObjGrp->Silver;
 	Bronze->Text=ObjGrp->Bronze;
 	Minimum->Text=ObjGrp->Minimum;
-	mid->Text=ObjGrp->Capacity;
-	int total_weight=0;
-	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
-	{
-		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
-	}
-	end->Text=ConvertToPString(total_weight);
-	l.empty();
 	}
 Platform::String^ MainPage::ConvertToPString(int val)
 	{
@@ -189,23 +195,6 @@ void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Wind
 
 	ProfitBlock->Text=ObjGrp->Profit;
 	WeightBlock->Text=ObjGrp->Weight;
-
-	progress_main->Value=min((ConvertToInt(ObjGrp->Weight)*100)/(ConvertToInt(ObjGrp->Capacity)),100);
-	int total_weight=0;
-	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
-	{
-		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
-	}
-	if (ConvertToInt(ObjGrp->Weight)>ConvertToInt(ObjGrp->Capacity))
-	{
-		progress_total->Value=((ConvertToInt(ObjGrp->Weight)-ConvertToInt(ObjGrp->Capacity))*100)/(total_weight-ConvertToInt(ObjGrp->Capacity));
-	}
-	else
-	{
-		progress_total->Value=0;
-	}
-
-	
 }
 
 
@@ -221,6 +210,7 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	bool PassToNextLevel=false;
 	Point P(10,10);
 	Platform::String^ S;
+	int med=-1;
 
 	if (weight<=capacity)
 	{
@@ -228,21 +218,25 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		{
 			S="Congrats! You got gold.";
 			PassToNextLevel=true;
+			med=3;
 		}
 		else if (profit>=silver)
 		{
 			PassToNextLevel=true;
 			S="You got silver.";
+			med=2;
 		}
 		else if (profit>=bronze)
 		{
 			PassToNextLevel=true;
 			S="You got bronze.";
+			med=1;
 		}
 		else if (profit>=minimum)
 		{
 			PassToNextLevel=true;
 			S="You passed the level.";
+			med=0;
 		}
 		else
 		{
@@ -256,9 +250,27 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	auto flyout = ref new MessageDialog("",S);
 	if(PassToNextLevel)
 	{
+		if(Level!=HighestLevelReached)
+		{
+			if(med>medals[Level-1])
+				medals[Level-1] = med;
+			auto values = localSettings->Values;
+			values->Insert("medal"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+		}
+		else
+		{
+			medals[Level-1]=med;
+		}
+		if(Level+1>HighestLevelReached)
+		{
+			medals[Level-1] = med;
+			HighestLevelReached=Level+1;
+			auto values = localSettings->Values;
+			values->Insert("HighestLevelReached", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(HighestLevelReached))));
+			values->Insert("medal"+ConvertToPString(Level-1), dynamic_cast<PropertyValue^>(PropertyValue::CreateInt32Array(medals)));
+		}
 		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
 		{
-			Result->Text="Try Again was selected";
 			ObjGrp->Items->Clear();
 			InitializeObjects();
 			AnalyzeObjects();
@@ -270,7 +282,6 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		  flyout->Commands->Append(ref new UICommand("Continue", ref new UICommandInvokedHandler([this](IUICommand^ command)
 		{
 			//rootPage->NotifyUser("The 'Install updates' command has been selected.", NotifyType::StatusMessage);
-			Result->Text="Continue was selected";
 			Level++;
 			LevelText->Text=ConvertToPString(Level);
 			ObjGrp->Items->Clear();
@@ -288,7 +299,6 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		 flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
 		{
 			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
-			Result->Text="Try Again was selected";
 			IsPaused=false;
 		
 		})));
@@ -351,7 +361,7 @@ void MainPage::ObjectCreator(int t)
 			float curRatio;
 			int wt,pt;
 			bool isValid=false;
-			srand(time(NULL));
+			srand((unsigned int)time(NULL));
 			auto ratio = float((200+rand()%200)/(100.0));
 			for(int i=0;i<t;i++)
 			{   isValid=false;
@@ -375,3 +385,9 @@ void MainPage::ObjectCreator(int t)
 			Capacity->Text=ObjGrp->Capacity;
 }
 
+
+
+void Project::MainPage::GoBack(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	this->Frame->Navigate(MenuPage::typeid,this);
+}

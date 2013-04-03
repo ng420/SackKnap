@@ -7,16 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Loaded="PageLoadedHandler">
-    <Grid Name="Grid0">
-        <Grid.Background>
-            <ImageBrush ImageSource="Assets/Hud.png"/>
-        </Grid.Background>
-
+    <Grid Name="Grid0" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="180" />
+            <RowDefinition Height="160" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border BorderBrush="Beige" BorderThickness="0,0,0,5">
+        <Border BorderBrush="BlueViolet" BorderThickness="0,0,0,5">
             <Grid Name="Grid1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
@@ -27,52 +23,52 @@
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="15,25,0,0">
-                            <TextBlock Text="Gold: " FontSize="24" Width="300" Foreground="White"/>
-                            <TextBlock Text="{Binding Path=Gold}" FontSize="24" x:Name="Gold" Foreground="White"></TextBlock>
+                            <TextBlock Text="Gold: " FontSize="24" Width="300" />
+                            <TextBlock Text="{Binding Path=Gold}" FontSize="24" x:Name="Gold" ></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Silver: " FontSize="24" Margin="15,0,0,0" Width="300" Foreground="White"/>
-                            <TextBlock Text="{Binding Path=Silver}" FontSize="24" x:Name="Silver" Foreground="White"></TextBlock>
+                            <TextBlock Text="Silver: " FontSize="24" Margin="15,0,0,0" Width="300" />
+                            <TextBlock Text="{Binding Path=Silver}" FontSize="24" x:Name="Silver" ></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Bronze: " FontSize="24" Margin="15,0,0,0" Width="300" Foreground="White"/>
-                            <TextBlock Text="{Binding Path=Bronze}" FontSize="24" x:Name="Bronze" Foreground="White"></TextBlock>
+                            <TextBlock Text="Bronze: " FontSize="24" Margin="15,0,0,0" Width="300" />
+                            <TextBlock Text="{Binding Path=Bronze}" FontSize="24" x:Name="Bronze" ></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Minimum: " FontSize="24" Margin="15,0,0,0" TextWrapping="Wrap" Width="300" Foreground="White"/>
-                            <TextBlock Text="{Binding Path=Minimum}" FontSize="24" x:Name="Minimum" Foreground="White"></TextBlock>
+                            <TextBlock Text="Minimum: " FontSize="24" Margin="15,0,0,0" TextWrapping="Wrap" Width="300" />
+                            <TextBlock Text="{Binding Path=Minimum}" FontSize="24" x:Name="Minimum" ></TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
                 <Grid Name="Grid1C" Grid.Column="2">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="15,25,0,0">
-                            <TextBlock Text="Elapsed Time:" TextAlignment="Center" FontSize="24" Foreground="White"/>
-                            <TextBlock x:Name="Timer" Text="{Binding Path=Timer}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" Foreground="White"/>
+                            <TextBlock Text="Elapsed Time:" TextAlignment="Center" FontSize="24" />
+                            <TextBlock x:Name="Timer" Text="{Binding Path=Timer}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Current Profit:" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" Foreground="White"/>
-                            <TextBlock x:Name="ProfitBlock" Text="{Binding Path=Profit}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" Foreground="White"/>
+                            <TextBlock Text="Current Profit:" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" />
+                            <TextBlock x:Name="ProfitBlock" Text="{Binding Path=Profit}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Current Weight:" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" Foreground="White"/>
-                            <TextBlock x:Name="WeightBlock" Text="{Binding Path=Weight}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" Foreground="White"/>
+                            <TextBlock Text="Current Weight:" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" />
+                            <TextBlock x:Name="WeightBlock" Text="{Binding Path=Weight}" TextAlignment="Center" FontSize="24" Margin="15,0,0,0" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Maximum Weight: " FontSize="24" Margin="15,0,0,0" TextWrapping="Wrap" Width="200" Foreground="White"/>
-                            <TextBlock Text="{Binding Path=Capacity}" x:Name="Capacity" FontSize="24" Foreground="White"/>
+                            <TextBlock Text="Maximum Weight: " FontSize="24" Margin="15,0,0,0" TextWrapping="Wrap" Width="200" />
+                            <TextBlock Text="{Binding Path=Capacity}" x:Name="Capacity" FontSize="24" />
                         </StackPanel>
-                        <TextBlock x:Name="Result" Text="" TextAlignment="Center" FontSize="16" Foreground="White"/>
                     </StackPanel>
                 </Grid>
             </Grid>
         </Border>
         <StackPanel Orientation="Horizontal">
-        <TextBlock x:Name="TitleText" Text="Level "
-            VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" Foreground="White"/>
+            <Button x:Name="backButton" Click="GoBack" Style="{StaticResource BackButtonStyle}"  VerticalAlignment="Center" />
+        <TextBlock x:Name="TitleText" Text="Level"
+            VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" />
             <TextBlock x:Name="LevelText" Text=""
-            VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" Foreground="White"/>
+            VerticalAlignment="Center" FontSize="48" Margin="56,0,0,0" />
         </StackPanel>
         <Grid Name="grid2" Grid.Row="1">
             <GridView x:Name="ItemListView" HorizontalAlignment="Center" ItemsSource="{Binding Path=Items}" SelectionChanged="ItemView_SelectionChanged" Margin="10,10,0,0" SelectionMode="Multiple">
@@ -98,16 +94,9 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <StackPanel Margin="0,375,0,0" Height="30" Orientation="Horizontal">
-                <TextBlock x:Name="start" Margin="195,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
-                <TextBlock x:Name="mid" Margin="455,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
-                <TextBlock x:Name="end" Margin="470,0,0,0" Width="20" Foreground="White" Text="0" FontSize="14"/>
-            </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                <Button Style="{StaticResource ResourceKey=GlassButton}" Content="Submit" Click="Submit" Width="150" Height="60" FontSize="24"/>
+                <Button Content="Submit" Click="Submit" Width="150" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
             </StackPanel>
-            <ProgressBar x:Name="progress_main" Minimum="0" Maximum="100" Height="20" Foreground="Green" Value="0" Margin="200,497,600,81"/>
-            <ProgressBar x:Name="progress_total" Minimum="0" Maximum="100" Height="20" Foreground="Red" Value="0" Margin="679,497,121,81"/>
         </Grid>
     </Grid>
 </Page>

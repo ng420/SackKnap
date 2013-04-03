@@ -40,6 +40,18 @@ void ::Project::MenuPage::Connect(int connectionId, Platform::Object^ target)
         (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
             ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Project::MenuPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MenuPage::Button_Click_1);
         break;
+    case 2:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Project::MenuPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MenuPage::Button_Click_2);
+        break;
+    case 3:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Project::MenuPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MenuPage::Button_Click_3);
+        break;
+    case 4:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Project::MenuPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&MenuPage::Button_Click_4);
+        break;
     }
     (void)connectionId; // Unused parameter
     (void)target; // Unused parameter

@@ -4,11 +4,11 @@
 //
 
 #pragma once
-
 #include "MainPage.g.h"
 #include "Object.h"
 #include <list>
 #include <vector>
+#include <map>
 
 namespace Project
 {
@@ -29,6 +29,9 @@ namespace Project
 void PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e);
 		ObjectsGroup^ ObjGrp;
+		int HighestLevelReached;
+		Windows::Storage::ApplicationDataContainer^ localSettings;
+		Platform::Array<int>^ medals;
 		std::list<int> l;
 		std::list<int>::iterator lit;
 		Platform::Collections::Vector<Objects^>^ ob;
@@ -52,5 +55,6 @@ void PageLoadedHandler(Platform::Object^ sender,
 		Platform::String^ ConvertToPString(int val);
 	private:
 		void Submit(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void GoBack(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

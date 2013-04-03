@@ -1,0 +1,124 @@
+﻿<Page
+    x:Class="Project.AchievementsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="BlueViolet" BorderThickness="0,0,0,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:ConnectionId='1' x:Name="backButton" Margin="40,10,0,0"                            Style="{StaticResource BackButtonStyle}"  VerticalAlignment="Center" />
+                <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Achievements" Style="{StaticResource PageHeaderTextStyle}" HorizontalAlignment="Center"/>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <TextBlock FontSize="36" TextAlignment="Left" Margin="30,10,30,10" TextWrapping="Wrap" Text="Here are your achievements..."/>
+                <Grid Height="100" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,10,0,0" Grid.Column="0">
+                        <Image x:Name="completed_10_levels" Width="60" Height="60" Source="Assets/pending.png"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Bring It On..!"/>
+                        <TextBlock FontSize="24" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Completed 10 levels at a stretch."/>
+                    </StackPanel>
+                </Grid>
+                <Grid Height="100" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,10,0,0" Grid.Column="0">
+                        <Image x:Name="finished_10_fast" Width="60" Height="60" Source="Assets/tick.png"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Where did the time go?"/>
+                        <TextBlock FontSize="24" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Finished levels 1-10 each within 30 seconds."/>
+                    </StackPanel>
+                </Grid>
+                <Grid Height="100" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,10,0,0" Grid.Column="0">
+                        <Image x:Name="completed_all_levels" Width="60" Height="60" Source="Assets/tick.png"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="I've Done It"/>
+                        <TextBlock FontSize="24" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Completed all levels."/>
+                    </StackPanel>
+                </Grid>
+                <Grid Height="100" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,10,0,0" Grid.Column="0">
+                        <Image x:Name="completed_20_levels" Width="60" Height="60" Source="Assets/pending.png"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="On A Spree"/>
+                            <TextBlock FontSize="24" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Completed 20 levels at a stretch."/>
+                    </StackPanel>
+                </Grid>
+                <Grid Height="100" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,10,0,0" Grid.Column="0">
+                        <Image x:Name="finished_20_fast" Width="60" Height="60" Source="Assets/pending.png"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Can't Beat Me..!"/>
+                            <TextBlock FontSize="24" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Finished levels 11-20 each within 60 seconds."/>
+                    </StackPanel>
+                </Grid>
+                <Grid Height="100" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,10,0,0" Grid.Column="0">
+                        <Image x:Name="gold_in_all" Width="60" Height="60" Source="Assets/tick.png"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Looks Like We Have A Winner..!"/>
+                        <TextBlock FontSize="24" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Got Gold in all levels."/>
+                    </StackPanel>
+                </Grid>
+                <Grid Height="100" Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,10,0,0" Grid.Column="0">
+                        <Image x:Name="crazy" Width="60" Height="60" Source="Assets/tick.png"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Absolutely Crazy About It"/>
+                        <TextBlock FontSize="24" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Submitted a solution successfully 100 times."/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</ScrollViewer>
+</Page>
+

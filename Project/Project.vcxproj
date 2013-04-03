@@ -129,12 +129,21 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AchievementsPage.xaml.h">
+      <DependentUpon>AchievementsPage.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Common\BindableBase.h" />
     <ClInclude Include="Common\BooleanNegationConverter.h" />
     <ClInclude Include="Common\BooleanToVisibilityConverter.h" />
     <ClInclude Include="Common\LayoutAwarePage.h" />
     <ClInclude Include="Common\RichTextColumns.h" />
     <ClInclude Include="Common\SuspensionManager.h" />
+    <ClInclude Include="HelpPage.xaml.h">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="LevelSelectPage.xaml.h">
+      <DependentUpon>LevelSelectPage.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="MenuPage.xaml.h">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </ClInclude>
@@ -151,11 +160,20 @@
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AchievementsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Common\StandardStyles.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GlassButton.xaml">
       <DeploymentContent>true</DeploymentContent>
+    </Page>
+    <Page Include="HelpPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LevelSelectPage.xaml">
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
@@ -171,14 +189,20 @@
     <None Include="Project_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\help.png" />
     <Image Include="Assets\Hud.png" />
     <Image Include="Assets\Logo.png" />
     <Image Include="Assets\Main.png" />
+    <Image Include="Assets\pending.png" />
     <Image Include="Assets\SmallLogo.png" />
     <Image Include="Assets\StoreLogo.png" />
     <Image Include="Assets\SplashScreen.png" />
+    <Image Include="Assets\tick.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AchievementsPage.xaml.cpp">
+      <DependentUpon>AchievementsPage.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
@@ -188,6 +212,12 @@
     <ClCompile Include="Common\LayoutAwarePage.cpp" />
     <ClCompile Include="Common\RichTextColumns.cpp" />
     <ClCompile Include="Common\SuspensionManager.cpp" />
+    <ClCompile Include="HelpPage.xaml.cpp">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="LevelSelectPage.xaml.cpp">
+      <DependentUpon>LevelSelectPage.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>

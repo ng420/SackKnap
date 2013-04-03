@@ -9,10 +9,16 @@
 #include "pch.h"
 #include "XamlTypeInfo.g.h"
 
+#include "AchievementsPage.xaml.h"
+#include "HelpPage.xaml.h"
+#include "LevelSelectPage.xaml.h"
 #include "MenuPage.xaml.h"
 #include "App.xaml.h"
 #include "MainPage.xaml.h"
 
+#include "AchievementsPage.g.hpp"
+#include "HelpPage.g.hpp"
+#include "LevelSelectPage.g.hpp"
 #include "MenuPage.g.hpp"
 #include "App.g.hpp"
 #include "MainPage.g.hpp"
@@ -74,14 +80,26 @@
         return ref new XamlSystemBaseType(typeName);
     }
 
-    if (typeName == L"Project.MainPage")
+    if (typeName == L"Project.AchievementsPage")
     {
         ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Windows.UI.Xaml.Controls.Page"));
         userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
         userType->Activator =
             []() -> Platform::Object^ 
             {
-                return ref new ::Project::MainPage(); 
+                return ref new ::Project::AchievementsPage(); 
+            };
+        return userType;
+    }
+
+    if (typeName == L"Project.HelpPage")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Windows.UI.Xaml.Controls.Page"));
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
+        userType->Activator =
+            []() -> Platform::Object^ 
+            {
+                return ref new ::Project::HelpPage(); 
             };
         return userType;
     }
@@ -105,6 +123,61 @@
                 auto newKey = (Platform::String^)key;
                 auto newItem = (Platform::Object^)item;
                 collection->Insert(newKey, newItem);
+            };
+        return userType;
+    }
+
+    if (typeName == L"Project.LevelSelectPage")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Project.Common.LayoutAwarePage"));
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
+        userType->Activator =
+            []() -> Platform::Object^ 
+            {
+                return ref new ::Project::LevelSelectPage(); 
+            };
+        userType->AddMemberName(L"levels");
+        return userType;
+    }
+
+    if (typeName == L"Windows.Foundation.Collections.IVector<Project.Levels>")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, nullptr);
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Metadata;
+        userType->CollectionAdd =
+            [](Object^ instance, Object^ item) -> void
+            {
+                auto collection = (Windows::Foundation::Collections::IVector<::Project::Levels^>^)instance;
+                auto newItem = (Project::Levels^)item;
+                collection->Append(newItem);
+            };
+        return userType;
+    }
+
+    if (typeName == L"Project.Levels")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Object"));
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
+        userType->Activator =
+            []() -> Platform::Object^ 
+            {
+                return ref new ::Project::Levels(); 
+            };
+        userType->AddMemberName(L"number");
+        userType->AddMemberName(L"BestMedal");
+        userType->AddMemberName(L"BestTime");
+        userType->SetIsBindable();
+        return userType;
+    }
+
+    if (typeName == L"Project.MainPage")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Windows.UI.Xaml.Controls.Page"));
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
+        userType->Activator =
+            []() -> Platform::Object^ 
+            {
+                return ref new ::Project::MainPage(); 
             };
         return userType;
     }
@@ -193,6 +266,77 @@
             {
                 auto that = (::Project::Common::LayoutAwarePage^)instance;
                 that->DefaultViewModel = (::Windows::Foundation::Collections::IObservableMap<::Platform::String^, ::Platform::Object^>^)value;
+            };
+        return xamlMember;
+    }
+
+    if (longMemberName == L"Project.LevelSelectPage.levels")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlMember^ xamlMember = ref new ::XamlTypeInfo::InfoProvider::XamlMember(this, L"levels", L"Windows.Foundation.Collections.IVector<Project.Levels>");
+        xamlMember->Getter =
+            [](Object^ instance) -> Object^
+            {
+                auto that = (::Project::LevelSelectPage^)instance;
+                return that->levels;
+            };
+
+        xamlMember->SetIsReadOnly();
+        return xamlMember;
+    }
+
+    if (longMemberName == L"Project.Levels.number")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlMember^ xamlMember = ref new ::XamlTypeInfo::InfoProvider::XamlMember(this, L"number", L"String");
+        xamlMember->Getter =
+            [](Object^ instance) -> Object^
+            {
+                auto that = (::Project::Levels^)instance;
+                return that->number;
+            };
+
+        xamlMember->Setter =
+            [](Object^ instance, Object^ value) -> void
+            {
+                auto that = (::Project::Levels^)instance;
+                that->number = (::Platform::String^)value;
+            };
+        return xamlMember;
+    }
+
+    if (longMemberName == L"Project.Levels.BestMedal")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlMember^ xamlMember = ref new ::XamlTypeInfo::InfoProvider::XamlMember(this, L"BestMedal", L"String");
+        xamlMember->Getter =
+            [](Object^ instance) -> Object^
+            {
+                auto that = (::Project::Levels^)instance;
+                return that->BestMedal;
+            };
+
+        xamlMember->Setter =
+            [](Object^ instance, Object^ value) -> void
+            {
+                auto that = (::Project::Levels^)instance;
+                that->BestMedal = (::Platform::String^)value;
+            };
+        return xamlMember;
+    }
+
+    if (longMemberName == L"Project.Levels.BestTime")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlMember^ xamlMember = ref new ::XamlTypeInfo::InfoProvider::XamlMember(this, L"BestTime", L"String");
+        xamlMember->Getter =
+            [](Object^ instance) -> Object^
+            {
+                auto that = (::Project::Levels^)instance;
+                return that->BestTime;
+            };
+
+        xamlMember->Setter =
+            [](Object^ instance, Object^ value) -> void
+            {
+                auto that = (::Project::Levels^)instance;
+                that->BestTime = (::Platform::String^)value;
             };
         return xamlMember;
     }
