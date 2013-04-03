@@ -49,6 +49,7 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="MenuPage.xaml.cpp" />
+    <ClCompile Include="LevelSelectPage.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -74,6 +75,7 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="MenuPage.xaml.h" />
+    <ClInclude Include="LevelSelectPage.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -85,6 +87,7 @@
     <Page Include="MainPage.xaml" />
     <Page Include="MenuPage.xaml" />
     <Page Include="GlassButton.xaml" />
+    <Page Include="LevelSelectPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Main.png">

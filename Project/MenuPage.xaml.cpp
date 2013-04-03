@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "MenuPage.xaml.h"
 #include "MainPage.xaml.h"
+#include "LevelSelectPage.xaml.h"
 using namespace Project;
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -55,4 +56,16 @@ void MenuPage::SaveState(IMap<String^, Object^>^ pageState)
 void Project::MenuPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(MainPage::typeid,this);
+}
+
+
+void Project::MenuPage::Button_Click_2(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	this->Frame->Navigate(LevelSelectPage::typeid,this);
+}
+
+
+void Project::MenuPage::Button_Click_3(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+
 }

@@ -135,6 +135,9 @@
     <ClInclude Include="Common\LayoutAwarePage.h" />
     <ClInclude Include="Common\RichTextColumns.h" />
     <ClInclude Include="Common\SuspensionManager.h" />
+    <ClInclude Include="LevelSelectPage.xaml.h">
+      <DependentUpon>LevelSelectPage.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="MenuPage.xaml.h">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </ClInclude>
@@ -156,6 +159,9 @@
     </Page>
     <Page Include="GlassButton.xaml">
       <DeploymentContent>true</DeploymentContent>
+    </Page>
+    <Page Include="LevelSelectPage.xaml">
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
@@ -188,6 +194,9 @@
     <ClCompile Include="Common\LayoutAwarePage.cpp" />
     <ClCompile Include="Common\RichTextColumns.cpp" />
     <ClCompile Include="Common\SuspensionManager.cpp" />
+    <ClCompile Include="LevelSelectPage.xaml.cpp">
+      <DependentUpon>LevelSelectPage.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>

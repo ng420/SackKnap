@@ -16,6 +16,7 @@ namespace Windows {
                 ref class GridView;
                 ref class ProgressBar;
                 ref class TextBlock;
+                ref class Button;
             }
         }
     }
@@ -41,6 +42,7 @@ namespace Project
         private: ::Windows::UI::Xaml::Controls::TextBlock^ start;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ mid;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ end;
+        private: ::Windows::UI::Xaml::Controls::Button^ backButton;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ TitleText;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ LevelText;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1;
