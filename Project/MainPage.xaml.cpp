@@ -228,6 +228,7 @@ void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Wind
 
 void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	DisplayToast("Hello","Hey");
 	int profit = ConvertToInt(ProfitBlock->Text);
 	int weight = ConvertToInt(WeightBlock->Text);
 	int gold = ConvertToInt(Gold->Text);
@@ -359,9 +360,10 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	{
 		CString[i] = (char)T[i];
 	}
-	minute[0]=CString[0];
-	for(i=2;i<Size;i++)
-		second[i-2]=CString[i];
+	for(i=0;i<2;i++)
+		minute[i]=CString[i];
+	for(i=3;i<Size;i++)
+		second[i-3]=CString[i];
 	int seconds=atoi(second);
 	int minutes=atoi(minute);
 	seconds += 1;
@@ -382,9 +384,9 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	Platform::String^ m_string = ref new Platform::String(wm_char);
 	Platform::String^ s_string = ref new Platform::String(ws_char);
 	if(!IsPaused) 
-		ObjGrp->Time=(seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string);
+		ObjGrp->Time=(minutes<10)?((seconds>=10)?("0"+m_string+":"+s_string):("0"+m_string+":0"+s_string)):((seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string));
 	Timer->Text=ObjGrp->Time;
- }
+}
 void MainPage::ObjectCreator(int t)
 {
 			float curRatio;
@@ -423,14 +425,11 @@ void Project::MainPage::GoBack(Platform::Object^ sender, Windows::UI::Xaml::Rout
 
 void Project::MainPage::DisplayToast(Platform::String^ Header,Platform::String^ text)
 {
-	ToastTemplateType toastTemplate = ToastTemplateType::ToastImageAndText02; 
+	ToastTemplateType toastTemplate = ToastTemplateType::ToastText02;
 	XmlDocument^ toastXml = ToastNotificationManager::GetTemplateContent(toastTemplate);
 	XmlNodeList^ toastTextElements = toastXml->GetElementsByTagName("text");
 	toastTextElements->Item(0)->InnerText =  Header;
 	toastTextElements->Item(1)->InnerText =  text;
-	XmlNodeList^ toastImageAttributes = toastXml->GetElementsByTagName("image");
-	static_cast<XmlElement^>(toastImageAttributes->Item(0))->SetAttribute("src", "Assests/Hud.png");                        
-	static_cast<XmlElement^>(toastImageAttributes->Item(0))->SetAttribute("alt", "red graphic");
 	ToastNotification^ toast = ref new ToastNotification(toastXml);
 	ToastNotificationManager::CreateToastNotifier()->Show(toast);
 }
