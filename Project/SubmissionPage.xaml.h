@@ -21,7 +21,7 @@ namespace Project
 	protected:
 		virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 	private:
-		Platform::String^ S;
+		Platform::String^ S,^Level,^NextLevel;
 		void replay(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void menu(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void next(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);

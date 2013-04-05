@@ -323,7 +323,16 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		  flyout->DefaultCommandIndex = 1;
 		// Set the command to be invoked when escape is pressed
 		  flyout->CancelCommandIndex = 1;
-		  this->Frame->Navigate(SubmissionPage::typeid,S);
+		  ApplicationDataCompositeValue^ composite = ref new ApplicationDataCompositeValue();
+			composite->Insert("level", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(Level))));
+			composite->Insert("levelnext", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(Level+1))));
+			composite->Insert("time", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
+			composite->Insert("med", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(S)));	
+		values->Insert("CurrentLevelSetting", composite);
+		if(Level<32)
+		  this->Frame->Navigate(SubmissionPage::typeid,this);
+		else
+			;
 	}
 	else
 	{
