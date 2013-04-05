@@ -124,23 +124,21 @@ int LevelSelectPage::ConvertToInt(Platform::String^ initial)
 
 void Project::LevelSelectPage::ItemListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
-	if (SettingsAnimatedPopup->IsOpen) { SettingsAnimatedPopup->IsOpen = false; }
+	if (SettingsAnimatedPopup->Margin==Thickness(0,0,0,0)) { SettingsAnimatedPopup->Margin = Thickness(0,0,0,150); }
 	auto lev = safe_cast<Levels^>(itemListView->SelectedItem);
-	if (!SettingsAnimatedPopup->IsOpen) 
+	if (SettingsAnimatedPopup->Margin==Thickness(0,0,0,150)) 
             {
-                RootPopupBorder->Width = 500;
-				SettingsAnimatedPopup->HorizontalOffset = Window::Current->Bounds.Width-500;
 				LevelNumber->Text=lev->number;
 				BestMedalText->Text=lev->BestMedal;
 				BestTimeText->Text=lev->BestTime;
-                SettingsAnimatedPopup->IsOpen = true; 
+                SettingsAnimatedPopup->Margin=Thickness(0,0,0,0); 
             }
 }
 
 
 void Project::LevelSelectPage::CloseSettingsPopupClicked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	if (SettingsAnimatedPopup->IsOpen) { SettingsAnimatedPopup->IsOpen = false; }
+	if (SettingsAnimatedPopup->Margin==Thickness(0,0,0,0)) { SettingsAnimatedPopup->Margin = Thickness(0,0,0,150); }
 }
 
 

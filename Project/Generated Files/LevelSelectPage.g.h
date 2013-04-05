@@ -14,20 +14,10 @@ namespace Windows {
             namespace Controls {
                 ref class Grid;
                 ref class GridView;
+                ref class StackPanel;
                 ref class Border;
                 ref class TextBlock;
                 ref class Button;
-            }
-        }
-    }
-}
-namespace Windows {
-    namespace UI {
-        namespace Xaml {
-            namespace Controls {
-                namespace Primitives {
-                    ref class Popup;
-                }
             }
         }
     }
@@ -55,7 +45,7 @@ namespace Project
     
         private: ::Windows::UI::Xaml::Controls::Grid^ MyGrid;
         private: ::Windows::UI::Xaml::Controls::GridView^ itemListView;
-        private: ::Windows::UI::Xaml::Controls::Primitives::Popup^ SettingsAnimatedPopup;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ SettingsAnimatedPopup;
         private: ::Windows::UI::Xaml::Controls::Border^ RootPopupBorder;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ BestTimeText;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ BestMedalText;
