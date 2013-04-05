@@ -7,6 +7,9 @@
 #include "MenuPage.xaml.h"
 #include "MainPage.xaml.h"
 #include "LevelSelectPage.xaml.h"
+#include "LevelSelectPage.xaml.h"
+#include "HelpPage.xaml.h"
+#include "AchievementsPage.xaml.h"
 using namespace Project;
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -69,12 +72,14 @@ void Project::MenuPage::Button_Click_2(Platform::Object^ sender, Windows::UI::Xa
 
 void Project::MenuPage::Button_Click_3(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	/*FileOpenPicker^ fileopenpicker = ref new FileOpenPicker();
-	auto singlefileoperation = fileopenpicker->PickSingleFileAsync();
-                if (singlefileoperation != nullptr)
-                {
-                     auto stream = singlefileoperation->OpenAsync(Windows::Storage::FileAccessMode::Read);
-					myMediaElement->SetSource(stream, "ContentType");
-                }
-				*/
+	this->Frame->Navigate(AchievementsPage::typeid,this);
+}
+
+void Project::MenuPage::Button_Click_4(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	this->Frame->Navigate(HelpPage::typeid,this);
+}
+
+void Project::MenuPage::Button_Click_5(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
 }

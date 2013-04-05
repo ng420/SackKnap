@@ -28,16 +28,6 @@ void ::Project::MainPage::InitializeComponent()
     grid2 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"grid2"));
     // Get the GridView named 'ItemListView'
     ItemListView = safe_cast<::Windows::UI::Xaml::Controls::GridView^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"ItemListView"));
-    // Get the ProgressBar named 'progress_main'
-    progress_main = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"progress_main"));
-    // Get the ProgressBar named 'progress_total'
-    progress_total = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"progress_total"));
-    // Get the TextBlock named 'start'
-    start = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"start"));
-    // Get the TextBlock named 'mid'
-    mid = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"mid"));
-    // Get the TextBlock named 'end'
-    end = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"end"));
     // Get the Button named 'backButton'
     backButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"backButton"));
     // Get the TextBlock named 'TitleText'

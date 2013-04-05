@@ -44,8 +44,8 @@
                 <Button Content="New Game" Width="250" Height="60" FontSize="24" Click="Button_Click_1" Background="Transparent" BorderBrush="Black" BorderThickness="2" />
                 <Button Content="Level Select" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2" Click="Button_Click_2"/>
                 <Button Content="Achievements" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2" Click="Button_Click_3"/>
-                <Button Content="Help" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
-                <Button Content="About" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
+                <Button Content="Help" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2" Click="Button_Click_4"/>
+                <Button Content="About" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2" Click="Button_Click_5"/>
             </StackPanel>
         </Grid>
      

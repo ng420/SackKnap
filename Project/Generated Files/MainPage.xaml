@@ -9,10 +9,10 @@
                               >
     <Grid Name="Grid0" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="180" />
+            <RowDefinition Height="160" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border BorderBrush="Beige" BorderThickness="0,0,0,5">
+        <Border BorderBrush="BlueViolet" BorderThickness="0,0,0,5">
             <Grid Name="Grid1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
@@ -95,16 +95,9 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <StackPanel Margin="0,375,0,0" Height="30" Orientation="Horizontal">
-                <TextBlock x:Name="start" Margin="195,0,0,0" Width="20"  Text="0" FontSize="14"/>
-                <TextBlock x:Name="mid" Margin="455,0,0,0" Width="20"  Text="0" FontSize="14"/>
-                <TextBlock x:Name="end" Margin="470,0,0,0" Width="20"  Text="0" FontSize="14"/>
-            </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                <Button x:ConnectionId='3' Style="{StaticResource ResourceKey=GlassButton}" Content="Submit"                Width="150" Height="60" FontSize="24"/>
+                <Button x:ConnectionId='3' Content="Submit"                Width="150" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
             </StackPanel>
-            <ProgressBar x:Name="progress_main" Minimum="0" Maximum="100" Height="20" Foreground="Green" Value="0" Margin="200,497,600,81"/>
-            <ProgressBar x:Name="progress_total" Minimum="0" Maximum="100" Height="20" Foreground="Red" Value="0" Margin="679,497,121,81"/>
         </Grid>
     </Grid>
 </Page>

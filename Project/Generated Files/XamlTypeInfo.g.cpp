@@ -9,11 +9,15 @@
 #include "pch.h"
 #include "XamlTypeInfo.g.h"
 
+#include "AchievementsPage.xaml.h"
+#include "HelpPage.xaml.h"
 #include "LevelSelectPage.xaml.h"
 #include "MenuPage.xaml.h"
 #include "App.xaml.h"
 #include "MainPage.xaml.h"
 
+#include "AchievementsPage.g.hpp"
+#include "HelpPage.g.hpp"
 #include "LevelSelectPage.g.hpp"
 #include "MenuPage.g.hpp"
 #include "App.g.hpp"
@@ -74,6 +78,30 @@
     if (typeName == L"String")
     {
         return ref new XamlSystemBaseType(typeName);
+    }
+
+    if (typeName == L"Project.AchievementsPage")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Windows.UI.Xaml.Controls.Page"));
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
+        userType->Activator =
+            []() -> Platform::Object^ 
+            {
+                return ref new ::Project::AchievementsPage(); 
+            };
+        return userType;
+    }
+
+    if (typeName == L"Project.HelpPage")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Windows.UI.Xaml.Controls.Page"));
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
+        userType->Activator =
+            []() -> Platform::Object^ 
+            {
+                return ref new ::Project::HelpPage(); 
+            };
+        return userType;
     }
 
     if (typeName == L"Project.Common.LayoutAwarePage")
