@@ -45,9 +45,14 @@
                 <Button x:ConnectionId='2' Content="Level Select" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"                       />
                 <Button x:ConnectionId='3' Content="Achievements" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"                       />
                 <Button x:ConnectionId='4' Content="Help" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"                       />
-                <Button Content="About" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
+                <Button x:ConnectionId='5' Content="About" Width="250" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"                       />
             </StackPanel>
         </Grid>
+     
+            <ContentControl x:Name="meHost">
+                <MediaElement AudioCategory="BackgroundCapableMedia" IsLooping="True" VerticalAlignment="Center"  Source="Assets/mus.wav" HorizontalAlignment="Center" Name="myMediaElement" Height="350" Width="640" />
+            </ContentControl>
+
         <VisualStateManager.VisualStateGroups>
 
             <!-- Visual states reflect the application's view state -->

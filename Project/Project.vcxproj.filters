@@ -94,7 +94,7 @@
     <Page Include="LevelSelectPage.xaml" />
     <Page Include="HelpPage.xaml" />
     <Page Include="AchievementsPage.xaml" />
-    <Page Include="SubmissionPage.xaml" />
+	<Page Include="SubmissionPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Main.png">
@@ -117,5 +117,10 @@
     <Text Include="Common\ReadMe.txt">
       <Filter>Common</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\mus.wav">
+      <Filter>Assets</Filter>
+    </Media>
   </ItemGroup>
 </Project>

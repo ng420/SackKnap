@@ -7,9 +7,9 @@
 #include "MenuPage.xaml.h"
 #include "MainPage.xaml.h"
 #include "LevelSelectPage.xaml.h"
+#include "LevelSelectPage.xaml.h"
 #include "HelpPage.xaml.h"
 #include "AchievementsPage.xaml.h"
-
 using namespace Project;
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -21,6 +21,8 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::Media;
+using namespace Windows::Storage::Pickers;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -58,7 +60,7 @@ void MenuPage::SaveState(IMap<String^, Object^>^ pageState)
 
 void Project::MenuPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	this->Frame->Navigate(MainPage::typeid,this);
+	this->Frame->Navigate(MainPage::typeid,"1");
 }
 
 
@@ -73,8 +75,11 @@ void Project::MenuPage::Button_Click_3(Platform::Object^ sender, Windows::UI::Xa
 	this->Frame->Navigate(AchievementsPage::typeid,this);
 }
 
-
 void Project::MenuPage::Button_Click_4(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(HelpPage::typeid,this);
+}
+
+void Project::MenuPage::Button_Click_5(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
 }

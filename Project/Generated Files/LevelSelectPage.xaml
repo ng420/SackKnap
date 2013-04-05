@@ -33,7 +33,11 @@
         </Grid>
 
         <Grid Grid.Row="1" x:Name="MyGrid" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <GridView x:ConnectionId='2' x:Name="itemListView" 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GridView x:ConnectionId='2' x:Name="itemListView"  Grid.Row="0"
           Margin="120,0,0,60"
                                                            BorderThickness="1"  >
                 <GridView.ItemsPanel>
@@ -57,7 +61,8 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <Popup x:Name="SettingsAnimatedPopup" IsLightDismissEnabled="False">
+            <StackPanel Grid.Row="1">
+            <Popup x:Name="SettingsAnimatedPopup" IsLightDismissEnabled="True">
                 <Popup.ChildTransitions>
                     <TransitionCollection>
                         <PaneThemeTransition />
@@ -83,7 +88,8 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
-            </Popup>
+                </Popup>
+            </StackPanel>
         </Grid>
         <VisualStateManager.VisualStateGroups>
 

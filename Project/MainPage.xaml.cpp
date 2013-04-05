@@ -40,28 +40,44 @@ MainPage::MainPage()
 /// property is typically used to configure the page.</param>
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	
-	Initialize();
+	(void) e;	// Unused parameter
+	String^ L=ref new String;
+	L = ((String^)e->Parameter);
+	Level=ConvertToInt(L);
+	Initialize();	
 }
 void MainPage::PageLoadedHandler(Platform::Object^ sender,
-								 Windows::UI::Xaml::RoutedEventArgs^ e)
+          Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	Initialize();	
+	
 }
 void MainPage::Initialize()
 {
-	Level=1;
+	//Level=12;
 	localSettings = ApplicationData::Current->LocalSettings;
 	auto HighestLevelReach = safe_cast<String^>(localSettings->Values->Lookup("HighestLevelReached"));
 	//medals = safe_cast<Array<int>^>(localSettings->Values->Lookup("medals"));
 	medals = ref new Array<int>(30);
+	times = ref new Array<Platform::String^>(30);
 	if(HighestLevelReach==nullptr) HighestLevelReached =1;
 	else HighestLevelReached=ConvertToInt(HighestLevelReach);
-	/*for(int i=0;i<HighestLevelReached;i++)
+	for(int i=0;i<HighestLevelReached;i++)
 	{
-	auto med = safe_cast<String^>(localSettings->Values->Lookup("medal"+ConvertToPString(i)));
-	medals[i]=ConvertToInt(med);
-	}*/
+		String^ temp= ref new String;
+		String^ med=ref new String;
+		temp="medal"+ConvertToPString(i);
+		med = safe_cast<String^>(localSettings->Values->Lookup(temp));
+		if(med!=nullptr)
+		medals[i]=ConvertToInt(med);
+		else
+			medals[i]=-1;
+		temp="time"+ConvertToPString(i);
+		auto time=safe_cast<String^>(localSettings->Values->Lookup(temp));
+		if(med!=nullptr)
+			times[i]=(time);
+		else
+			times[i]="N/A";
+	}
 	LevelText->Text=ConvertToPString(Level);
 	InitializeObjects();
 	AnalyzeObjects();
@@ -70,11 +86,11 @@ void MainPage::Initialize()
 }
 void MainPage::InitializeObjects()
 {
-	IsPaused=false;
-	ObjGrp->Time="0:00";
-	ObjGrp->Profit="0";
-	ObjGrp->Weight="0";
-	ObjectCreator(5+Level/2);
+		IsPaused=false;
+		ObjGrp->Time="0:00";
+		ObjGrp->Profit="0";
+		ObjGrp->Weight="0";
+		ObjectCreator(5+Level/2);
 }
 Platform::String^ Project::MainPage::conv(Platform::String^ S1, Platform::String^ S2)
 {
@@ -91,7 +107,7 @@ Platform::String^ Project::MainPage::conv(Platform::String^ S1, Platform::String
 	a+=atoi(CString);
 	initial = S2;
 	W = initial->Data();
-	Size = wcslen( W );
+	 Size = wcslen( W );
 	CString= new char[Size + 1];
 	CString[ Size ] = 0;
 	for(int y=0;y<Size; y++)
@@ -110,66 +126,71 @@ Platform::String^ Project::MainPage::conv(Platform::String^ S1, Platform::String
 
 }
 void MainPage::ProfitEval(unsigned int i)
-{
-	w+=ConvertToInt(ob->GetAt(i)->weight);
-	p+=ConvertToInt(ob->GetAt(i)->profit);
-	if(w<=ConvertToInt(ObjGrp->Capacity)) l.push_back(p);
-	for(unsigned int j=i+1;j<ob->Size;j++)
 	{
-		if(w<=ConvertToInt(ObjGrp->Capacity))
+		w+=ConvertToInt(ob->GetAt(i)->weight);
+		p+=ConvertToInt(ob->GetAt(i)->profit);
+		if(w<=ConvertToInt(ObjGrp->Capacity)) l.push_back(p);
+		for(unsigned int j=i+1;j<ob->Size;j++)
 		{
-			ProfitEval(j);
-			w-=ConvertToInt(ob->GetAt(j)->weight);
-			p-=ConvertToInt(ob->GetAt(j)->profit);
+			if(w<=ConvertToInt(ObjGrp->Capacity))
+			{
+				ProfitEval(j);
+				w-=ConvertToInt(ob->GetAt(j)->weight);
+				p-=ConvertToInt(ob->GetAt(j)->profit);
+			}
 		}
 	}
-}
 void MainPage::AnalyzeObjects()
-{
-	w=0;p=0;
-	int c;
-	l.clear();
-	ob = ref new Platform::Collections::Vector<Objects^>();
-	for(unsigned int i=0;i<ObjGrp->Items->Size;i++)
-		ob->Append(ObjGrp->Items->GetAt(i));
-
-	c=ConvertToInt(ObjGrp->Capacity);
-	for(unsigned int i=0;i<ob->Size;i++)
 	{
-		ProfitEval(i);w-=ConvertToInt(ob->GetAt(i)->weight);p-=ConvertToInt(ob->GetAt(i)->profit);
-		//l.push_back(ConvertToInt(ob->GetAt(i)->profit));
-	}
-	l.sort();
-	l.reverse();
-	lit=l.begin();
-	ObjGrp->Gold=ConvertToPString(*lit);
-	int temp=*lit;
-	while(temp==*lit && lit!=l.end())
-		lit++;
-	ObjGrp->Silver=ConvertToPString(*lit);
-	temp=*lit;
-	while(temp==*lit && lit!=l.end())
-		lit++;
-	ObjGrp->Bronze=ConvertToPString(*lit);
-	temp=*lit;
-	while(temp==*lit && lit!=l.end())
-		lit++;
-	ObjGrp->Minimum=ConvertToPString(*lit);
+		w=0;p=0;
+		int c;
+		l.clear();
+		ob = ref new Platform::Collections::Vector<Objects^>();
+		for(unsigned int i=0;i<ObjGrp->Items->Size;i++)
+			ob->Append(ObjGrp->Items->GetAt(i));
+
+		c=ConvertToInt(ObjGrp->Capacity);
+		for(unsigned int i=0;i<ob->Size;i++)
+		{
+			ProfitEval(i);w-=ConvertToInt(ob->GetAt(i)->weight);p-=ConvertToInt(ob->GetAt(i)->profit);
+			//l.push_back(ConvertToInt(ob->GetAt(i)->profit));
+		}
+		l.sort();
+		l.reverse();
+		lit=l.begin();
+		ObjGrp->Gold=ConvertToPString(*lit);
+		int temp=*lit;
+		while(temp==*lit && lit!=l.end())
+			lit++;
+		ObjGrp->Silver=ConvertToPString(*lit);
+		temp=*lit;
+		while(temp==*lit && lit!=l.end())
+			lit++;
+		ObjGrp->Bronze=ConvertToPString(*lit);
+		temp=*lit;
+		while(temp==*lit && lit!=l.end())
+			lit++;
+		ObjGrp->Minimum=ConvertToPString(*lit);
 	Gold->Text=ObjGrp->Gold;
 	Silver->Text=ObjGrp->Silver;
 	Bronze->Text=ObjGrp->Bronze;
 	Minimum->Text=ObjGrp->Minimum;
-}
+	int total_weight=0;
+	for (unsigned int i=0;i<(ObjGrp->Items->Size);i++)
+	{
+		total_weight+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+	}
+	}
 Platform::String^ MainPage::ConvertToPString(int val)
-{
-	char char_str[10];
-	_itoa_s(val,char_str,10);
-	std::string s_str = std::string(char_str);
-	std::wstring wid_str = std::wstring(s_str.begin(), s_str.end());
-	const wchar_t* w_char = wid_str.c_str();
-	Platform::String^ p_string = ref new Platform::String(w_char);
-	return p_string;
-}
+	{
+		char char_str[10];
+		_itoa_s(val,char_str,10);
+		std::string s_str = std::string(char_str);
+		std::wstring wid_str = std::wstring(s_str.begin(), s_str.end());
+		const wchar_t* w_char = wid_str.c_str();
+		Platform::String^ p_string = ref new Platform::String(w_char);
+		return p_string;
+	}
 int MainPage::ConvertToInt(Platform::String^ initial)
 {
 	const wchar_t *W = initial->Data();
@@ -180,7 +201,7 @@ int MainPage::ConvertToInt(Platform::String^ initial)
 	{
 		CString[y] = (char)W[y];
 	}
-	return atoi(CString);
+		return atoi(CString);
 }
 void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
@@ -197,18 +218,6 @@ void Project::MainPage::ItemView_SelectionChanged(Platform::Object^ sender, Wind
 
 	ProfitBlock->Text=ObjGrp->Profit;
 	WeightBlock->Text=ObjGrp->Weight;
-	int minimum = ConvertToInt(Minimum->Text);
-	int capacity = ConvertToInt(Capacity->Text);
-	int profit = ConvertToInt(ProfitBlock->Text);
-	int weight = ConvertToInt(WeightBlock->Text);
-	if (profit>=minimum && weight<=capacity)
-	{
-		submit->IsEnabled="True";
-	}
-	else
-	{
-		submit->IsEnabled="False";
-	}
 }
 
 
@@ -221,68 +230,133 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	int bronze = ConvertToInt(Bronze->Text);
 	int minimum = ConvertToInt(Minimum->Text);
 	int capacity = ConvertToInt(Capacity->Text);
+	bool PassToNextLevel=false;
 	Point P(10,10);
 	Platform::String^ S;
 	int med=-1;
 
-	if (profit>=gold)
+	if (weight<=capacity)
 	{
-		S="Congratulations! You got gold.";
-		med=3;
-	}
-	else if (profit>=silver)
-	{
-		S="You got silver.";
-		med=2;
-	}
-	else if (profit>=bronze)
-	{
-		S="You got bronze.";
-		med=1;
-	}
-	else if (profit>=minimum)
-	{
-		S="You passed the level.";
-		med=0;
-	}
-
-	if(Level!=HighestLevelReached)
-	{
-		if(med>medals[Level-1])
-			medals[Level-1] = med;
-		auto values = localSettings->Values;
-		values->Insert("medal"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+		if (profit>=gold)
+		{
+			S="Congrats! You got gold.";
+			PassToNextLevel=true;
+			med=3;
+		}
+		else if (profit>=silver)
+		{
+			PassToNextLevel=true;
+			S="You got silver.";
+			med=2;
+		}
+		else if (profit>=bronze)
+		{
+			PassToNextLevel=true;
+			S="You got bronze.";
+			med=1;
+		}
+		else if (profit>=minimum)
+		{
+			PassToNextLevel=true;
+			S="You passed the level.";
+			med=0;
+		}
+		else
+		{
+			S="You did not reach the Minimum Required Profit.Try Again.";
+		}
 	}
 	else
 	{
-		medals[Level-1]=med;
+		S="Capacity exceeded! Try Again.";
 	}
-	if(Level+1>HighestLevelReached)
+	auto flyout = ref new MessageDialog("",S);
+	if(PassToNextLevel)
 	{
-		medals[Level-1] = med;
-		HighestLevelReached=Level+1;
 		auto values = localSettings->Values;
-		values->Insert("HighestLevelReached", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(HighestLevelReached))));
-		values->Insert("medal"+ConvertToPString(Level-1), dynamic_cast<PropertyValue^>(PropertyValue::CreateInt32Array(medals)));
+		auto Time = Timer->Text;
+		if(Level!=HighestLevelReached)
+		{
+			if(med>medals[Level-1])
+			{
+				medals[Level-1] = med;
+				values->Insert("medal"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+			}
+			if(isTimeLesser(Time,times[Level-1]))
+			{
+				times[Level-1]=Time;
+				values->Insert("time"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
+			}
+		}
+		else
+		{
+			medals[Level-1] = med;
+			times[Level-1]=Time;
+			HighestLevelReached=Level+1;
+			auto values = localSettings->Values;
+			auto temp = "medal"+ConvertToPString(Level-1);
+			values->Insert("HighestLevelReached", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(HighestLevelReached))));
+			values->Insert(temp, dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+			values->Insert("time"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
+		}
+		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			ObjGrp->Items->Clear();
+			InitializeObjects();
+			AnalyzeObjects();
+			ItemListView->SelectedItems->Clear();
+			//Initialize();
+			
+		})));
+	  
+		  flyout->Commands->Append(ref new UICommand("Continue", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Install updates' command has been selected.", NotifyType::StatusMessage);
+			Level++;
+			LevelText->Text=ConvertToPString(Level);
+			ObjGrp->Items->Clear();
+			InitializeObjects();
+			AnalyzeObjects();
+			ItemListView->SelectedItems->Clear();
+		})));
+
+		  flyout->DefaultCommandIndex = 1;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 1;
+		  ApplicationDataCompositeValue^ composite = ref new ApplicationDataCompositeValue();
+			composite->Insert("level", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(Level))));
+			composite->Insert("levelnext", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(Level+1))));
+			composite->Insert("time", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
+			composite->Insert("med", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(S)));	
+		values->Insert("CurrentLevelSetting", composite);
+		if(Level<32)
+		  this->Frame->Navigate(SubmissionPage::typeid,this);
+		else
+			;
 	}
-
-	Level++;
-	LevelText->Text=ConvertToPString(Level);
-	ObjGrp->Items->Clear();
-	InitializeObjects();
-	AnalyzeObjects();
-	ItemListView->SelectedItems->Clear();
-	this->Frame->Navigate(SubmissionPage::typeid,S);
-
-	IsPaused=true;
+	else
+	{
+		 flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
+		{
+			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
+			IsPaused=false;
+		
+		})));
+		 flyout->DefaultCommandIndex = 0;
+		// Set the command to be invoked when escape is pressed
+		  flyout->CancelCommandIndex = 0;
+		  IsPaused=true;
+	flyout->ShowAsync();
+	}
+	
 }
 void Project::MainPage::StartTimerAndRegisterHandler()
 {
 	DispatcherTimer^ timer=ref new DispatcherTimer();
-	TimeSpan ts;
-	ts.Duration = 10000000;
-	timer->Interval = ts;
-	timer->Start();
+    TimeSpan ts;
+    ts.Duration = 10000000;
+    timer->Interval = ts;
+    timer->Start();
 	timer->Tick += ref new EventHandler<Object^>(this,&Project::MainPage::OnTick);
 }
 void Project::MainPage::OnTick(Object^ sender,Object^ e)
@@ -307,7 +381,7 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	{
 		seconds=0;
 		minutes+=1;
-	}
+ 	}
 	char tim[3],tis[3];
 	_itoa_s(minutes,tim,10);
 	_itoa_s(seconds,tis,10);
@@ -322,34 +396,34 @@ void Project::MainPage::OnTick(Object^ sender,Object^ e)
 	if(!IsPaused) 
 		ObjGrp->Time=(seconds>=10)?(m_string+":"+s_string):(m_string+":0"+s_string);
 	Timer->Text=ObjGrp->Time;
-}
+ }
 void MainPage::ObjectCreator(int t)
 {
-	float curRatio;
-	int wt,pt;
-	bool isValid=false;
-	srand((unsigned int)time(NULL));
-	auto ratio = float((200+rand()%200)/(100.0));
-	for(int i=0;i<t;i++)
-	{   isValid=false;
-	curRatio=((ratio*100)+rand()%200-100)/100;
-	while(!isValid)
-	{
-		isValid=true;
-		wt=10+rand()%20;
-		for(int j=0;j<i;j++)
-			if(wt==ConvertToInt(ObjGrp->Items->GetAt(j)->weight))
-				isValid=false;
-		pt=int(curRatio*(wt));
-	}
-	AddObject(ConvertToPString(pt),ConvertToPString(wt));
-	}
-	int c=0;
-	for(int i=0;i<t;i++)
-		c+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
-	c=(c/2);
-	ObjGrp->Capacity=ConvertToPString(c);
-	Capacity->Text=ObjGrp->Capacity;
+			float curRatio;
+			int wt,pt;
+			bool isValid=false;
+			srand((unsigned int)time(NULL));
+			auto ratio = float((200+rand()%200)/(100.0));
+			for(int i=0;i<t;i++)
+			{   isValid=false;
+				curRatio=((ratio*100)+rand()%200-100)/100;
+				while(!isValid)
+				{
+					isValid=true;
+					wt=10+rand()%20;
+					for(int j=0;j<i;j++)
+						if(wt==ConvertToInt(ObjGrp->Items->GetAt(j)->weight))
+						isValid=false;
+					pt=int(curRatio*(wt));
+				}
+				AddObject(ConvertToPString(pt),ConvertToPString(wt));
+			}
+			int c=0;
+			for(int i=0;i<t;i++)
+			c+=ConvertToInt(ObjGrp->Items->GetAt(i)->weight);
+			c=(c/2);
+			ObjGrp->Capacity=ConvertToPString(c);
+			Capacity->Text=ObjGrp->Capacity;
 }
 
 
@@ -357,4 +431,25 @@ void MainPage::ObjectCreator(int t)
 void Project::MainPage::GoBack(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(MenuPage::typeid,this);
+}
+
+bool Project::MainPage::isTimeLesser(Platform::String^ Time1,Platform::String^ Time2)
+{
+	const wchar_t *W = Time1->Data();
+	int Size = wcslen( W );
+	char *CString= new char[Size + 1];
+	CString[ Size ] = 0;
+	for(int y=0;y<Size; y++)
+	{
+		CString[y] = (char)W[y];
+	}
+	W = Time2->Data();
+	Size = wcslen( W );
+	char *DString= new char[Size + 1];
+	DString[ Size ] = 0;
+	for(int y=0;y<Size; y++)
+	{
+		DString[y] = (char)W[y];
+	}
+	return (strcmp(CString,DString)<0);
 }

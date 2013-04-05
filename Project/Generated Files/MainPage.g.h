@@ -36,7 +36,6 @@ namespace Project
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid0;
         private: ::Windows::UI::Xaml::Controls::Grid^ grid2;
         private: ::Windows::UI::Xaml::Controls::GridView^ ItemListView;
-        private: ::Windows::UI::Xaml::Controls::Button^ submit;
         private: ::Windows::UI::Xaml::Controls::Button^ backButton;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ TitleText;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ LevelText;
