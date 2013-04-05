@@ -155,6 +155,9 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="SubmissionPage.xaml.h">
+      <DependentUpon>SubmissionPage.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -179,6 +182,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MenuPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubmissionPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -231,6 +237,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SubmissionPage.xaml.cpp">
+      <DependentUpon>SubmissionPage.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

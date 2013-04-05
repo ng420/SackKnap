@@ -15,6 +15,7 @@
 #include "MenuPage.xaml.h"
 #include "App.xaml.h"
 #include "MainPage.xaml.h"
+#include "SubmissionPage.xaml.h"
 
 #include "AchievementsPage.g.hpp"
 #include "HelpPage.g.hpp"
@@ -22,6 +23,7 @@
 #include "MenuPage.g.hpp"
 #include "App.g.hpp"
 #include "MainPage.g.hpp"
+#include "SubmissionPage.g.hpp"
 
 ::Platform::Collections::Vector<::Windows::UI::Xaml::Markup::IXamlMetadataProvider^>^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::OtherProviders::get()
 {
@@ -190,6 +192,18 @@
             []() -> Platform::Object^ 
             {
                 return ref new ::Project::MenuPage(); 
+            };
+        return userType;
+    }
+
+    if (typeName == L"Project.SubmissionPage")
+    {
+        ::XamlTypeInfo::InfoProvider::XamlUserType^ userType = ref new ::XamlTypeInfo::InfoProvider::XamlUserType(this, typeName, GetXamlTypeByName(L"Windows.UI.Xaml.Controls.Page"));
+        userType->KindOfType = ::Windows::UI::Xaml::Interop::TypeKind::Custom;
+        userType->Activator =
+            []() -> Platform::Object^ 
+            {
+                return ref new ::Project::SubmissionPage(); 
             };
         return userType;
     }

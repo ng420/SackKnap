@@ -95,7 +95,7 @@
                 </GridView.ItemTemplate>
             </GridView>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                <Button x:ConnectionId='3' Content="Submit"                Width="150" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
+                <Button x:ConnectionId='3' IsEnabled="False" x:Name="submit" Content="Submit"                Width="150" Height="60" FontSize="24" Background="Transparent" BorderBrush="Black" BorderThickness="2"/>
             </StackPanel>
         </Grid>
     </Grid>

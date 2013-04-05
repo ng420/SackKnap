@@ -50,6 +50,8 @@
     </ClCompile>
     <ClCompile Include="MenuPage.xaml.cpp" />
     <ClCompile Include="LevelSelectPage.xaml.cpp" />
+    <ClCompile Include="AchievementsPage.xaml.cpp" />
+    <ClCompile Include="HelpPage.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -76,6 +78,8 @@
     </ClInclude>
     <ClInclude Include="MenuPage.xaml.h" />
     <ClInclude Include="LevelSelectPage.xaml.h" />
+    <ClInclude Include="AchievementsPage.xaml.h" />
+    <ClInclude Include="HelpPage.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -90,6 +94,7 @@
     <Page Include="LevelSelectPage.xaml" />
     <Page Include="HelpPage.xaml" />
     <Page Include="AchievementsPage.xaml" />
+    <Page Include="SubmissionPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Main.png">
