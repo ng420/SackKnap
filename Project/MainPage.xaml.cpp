@@ -9,6 +9,7 @@
 #include "MenuPage.xaml.h"
 #include <list>
 #include <time.h>
+#include "SubmissionPage.xaml.h"
 using namespace Project;
 
 using namespace Platform;
@@ -322,6 +323,7 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		  flyout->DefaultCommandIndex = 1;
 		// Set the command to be invoked when escape is pressed
 		  flyout->CancelCommandIndex = 1;
+		  this->Frame->Navigate(SubmissionPage::typeid,S);
 	}
 	else
 	{
@@ -334,9 +336,10 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		 flyout->DefaultCommandIndex = 0;
 		// Set the command to be invoked when escape is pressed
 		  flyout->CancelCommandIndex = 0;
-	}
-	IsPaused=true;
+		  IsPaused=true;
 	flyout->ShowAsync();
+	}
+	
 }
 void Project::MainPage::StartTimerAndRegisterHandler()
 {

@@ -94,6 +94,7 @@
     <Page Include="LevelSelectPage.xaml" />
     <Page Include="HelpPage.xaml" />
     <Page Include="AchievementsPage.xaml" />
+	<Page Include="SubmissionPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Main.png">
