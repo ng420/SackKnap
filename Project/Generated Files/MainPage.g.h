@@ -42,7 +42,6 @@ namespace Project
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1B;
         private: ::Windows::UI::Xaml::Controls::Grid^ Grid1C;
-        private: ::Windows::UI::Xaml::Controls::TextBlock^ Result;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Capacity;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ WeightBlock;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ ProfitBlock;

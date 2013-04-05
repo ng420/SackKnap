@@ -65,6 +65,7 @@ void Project::LevelSelectPage::PageLoadedHandler(Platform::Object^ sender, Windo
 	if(HighestLevelReach==nullptr) HighestLevelReached =1;
 	else HighestLevelReached=ConvertToInt(HighestLevelReach);
 	auto medals = ref new Array<int>(30);
+	auto times = ref new Array<Platform::String^>(30);
 	for(int i=0;i<HighestLevelReached;i++)
 	{
 		String^ med=ref new String;
@@ -74,6 +75,12 @@ void Project::LevelSelectPage::PageLoadedHandler(Platform::Object^ sender, Windo
 		medals[i]=ConvertToInt(med);
 		else
 			medals[i]=-1;
+		temp="time"+ConvertToPString(i);
+		auto time=safe_cast<String^>(localSettings->Values->Lookup(temp));
+		if(med!=nullptr)
+			times[i]=(time);
+		else
+			times[i]="N/A";
 	}
 	for(int i=0;i<HighestLevelReached;i++)
 	{
@@ -86,7 +93,7 @@ void Project::LevelSelectPage::PageLoadedHandler(Platform::Object^ sender, Windo
 		default:
 			break;
 		}
-		AddLevel(ConvertToPString(i+1),"1:00",temp);
+		AddLevel(ConvertToPString(i+1),times[i],temp);
 	}
 	itemListView->ItemsSource= levels;
 }

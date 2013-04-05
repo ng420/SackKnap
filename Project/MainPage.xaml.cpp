@@ -57,6 +57,7 @@ void MainPage::Initialize()
 	auto HighestLevelReach = safe_cast<String^>(localSettings->Values->Lookup("HighestLevelReached"));
 	//medals = safe_cast<Array<int>^>(localSettings->Values->Lookup("medals"));
 	medals = ref new Array<int>(30);
+	times = ref new Array<Platform::String^>(30);
 	if(HighestLevelReach==nullptr) HighestLevelReached =1;
 	else HighestLevelReached=ConvertToInt(HighestLevelReach);
 	for(int i=0;i<HighestLevelReached;i++)
@@ -64,13 +65,18 @@ void MainPage::Initialize()
 		String^ temp= ref new String;
 		String^ med=ref new String;
 		temp="medal"+ConvertToPString(i);
-		med = safe_cast<String^>(localSettings->Values->Lookup("medal0"));
+		med = safe_cast<String^>(localSettings->Values->Lookup(temp));
 		if(med!=nullptr)
 		medals[i]=ConvertToInt(med);
 		else
-			medals[i]=0;
+			medals[i]=-1;
+		temp="time"+ConvertToPString(i);
+		auto time=safe_cast<String^>(localSettings->Values->Lookup(temp));
+		if(med!=nullptr)
+			times[i]=(time);
+		else
+			times[i]="N/A";
 	}
-	Result->Text=ConvertToPString(medals[Level-1]);
 	LevelText->Text=ConvertToPString(Level);
 	InitializeObjects();
 	AnalyzeObjects();
@@ -266,29 +272,31 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	auto flyout = ref new MessageDialog("",S);
 	if(PassToNextLevel)
 	{
+		auto values = localSettings->Values;
+		auto Time = Timer->Text;
 		if(Level!=HighestLevelReached)
 		{
 			if(med>medals[Level-1])
+			{
 				medals[Level-1] = med;
-			Result->Text=ConvertToPString(medals[Level-1]);
-			auto values = localSettings->Values;
-			values->Insert("medal"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+				values->Insert("medal"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+			}
+			if(isTimeLesser(Time,times[Level-1]))
+			{
+				times[Level-1]=Time;
+				values->Insert("time"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
+			}
 		}
 		else
 		{
-			medals[Level-1]=med;
-			auto values = localSettings->Values;
-			auto temp = "medal"+ConvertToPString(Level-1);
-			values->Insert(temp,dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
-		}
-		if(Level+1>HighestLevelReached)
-		{
 			medals[Level-1] = med;
+			times[Level-1]=Time;
 			HighestLevelReached=Level+1;
 			auto values = localSettings->Values;
 			auto temp = "medal"+ConvertToPString(Level-1);
 			values->Insert("HighestLevelReached", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(HighestLevelReached))));
 			values->Insert(temp, dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+			values->Insert("time"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
 		}
 		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
 		{
@@ -411,4 +419,25 @@ void MainPage::ObjectCreator(int t)
 void Project::MainPage::GoBack(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(MenuPage::typeid,this);
+}
+
+bool Project::MainPage::isTimeLesser(Platform::String^ Time1,Platform::String^ Time2)
+{
+	const wchar_t *W = Time1->Data();
+	int Size = wcslen( W );
+	char *CString= new char[Size + 1];
+	CString[ Size ] = 0;
+	for(int y=0;y<Size; y++)
+	{
+		CString[y] = (char)W[y];
+	}
+	W = Time2->Data();
+	Size = wcslen( W );
+	char *DString= new char[Size + 1];
+	DString[ Size ] = 0;
+	for(int y=0;y<Size; y++)
+	{
+		DString[y] = (char)W[y];
+	}
+	return (strcmp(CString,DString)<0);
 }

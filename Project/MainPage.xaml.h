@@ -32,6 +32,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 		int HighestLevelReached;
 		Windows::Storage::ApplicationDataContainer^ localSettings;
 		Platform::Array<int>^ medals;
+		Platform::Array<Platform::String^>^times;
 		std::list<int> l;
 		std::list<int>::iterator lit;
 		Platform::Collections::Vector<Objects^>^ ob;
@@ -47,6 +48,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 		void ObjectCreator(int t);
 	public:
 		void AnalyzeObjects();
+		bool isTimeLesser(Platform::String^ Time1,Platform::String^ Time2);
 		void StartTimerAndRegisterHandler();
 		void OnTick(Object^ sender,Object^ e);
 		void ProfitEval(unsigned int i);
