@@ -12,6 +12,8 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class ContentControl;
+                ref class MediaElement;
                 ref class TextBlock;
             }
         }
@@ -38,6 +40,8 @@ namespace Project
     private:
         bool _contentLoaded;
     
+        private: ::Windows::UI::Xaml::Controls::ContentControl^ meHost;
+        private: ::Windows::UI::Xaml::Controls::MediaElement^ myMediaElement;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ pageTitle;
         private: ::Windows::UI::Xaml::VisualStateGroup^ ApplicationViewStates;
         private: ::Windows::UI::Xaml::VisualState^ FullScreenLandscape;

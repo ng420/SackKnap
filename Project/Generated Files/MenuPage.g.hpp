@@ -22,6 +22,10 @@ void ::Project::MenuPage::InitializeComponent()
     // Call LoadComponent on ms-appx:///MenuPage.xaml
     ::Windows::UI::Xaml::Application::LoadComponent(this, ref new ::Windows::Foundation::Uri(L"ms-appx:///MenuPage.xaml"), ::Windows::UI::Xaml::Controls::Primitives::ComponentResourceLocation::Application);
 
+    // Get the ContentControl named 'meHost'
+    meHost = safe_cast<::Windows::UI::Xaml::Controls::ContentControl^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"meHost"));
+    // Get the MediaElement named 'myMediaElement'
+    myMediaElement = safe_cast<::Windows::UI::Xaml::Controls::MediaElement^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"myMediaElement"));
     // Get the TextBlock named 'pageTitle'
     pageTitle = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"pageTitle"));
     // Get the VisualStateGroup named 'ApplicationViewStates'

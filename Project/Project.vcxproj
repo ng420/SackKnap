@@ -215,6 +215,9 @@
   <ItemGroup>
     <Text Include="Common\ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\mus.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

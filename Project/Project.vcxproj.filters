@@ -102,4 +102,9 @@
       <Filter>Common</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\mus.wav">
+      <Filter>Assets</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

@@ -49,7 +49,7 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <Popup x:Name="SettingsAnimatedPopup" IsLightDismissEnabled="False">
+            <Popup x:Name="SettingsAnimatedPopup" IsLightDismissEnabled="True">
                 <Popup.ChildTransitions>
                     <TransitionCollection>
                         <PaneThemeTransition />

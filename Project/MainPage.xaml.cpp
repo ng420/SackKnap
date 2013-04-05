@@ -40,26 +40,36 @@ MainPage::MainPage()
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	(void) e;	// Unused parameter
+	String^ L=ref new String;
+	L = ((String^)e->Parameter);
+	Level=ConvertToInt(L);
+	Initialize();	
 }
 void MainPage::PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	Initialize();	
+	
 }
 void MainPage::Initialize()
 {
-	Level=1;
+	//Level=12;
 	localSettings = ApplicationData::Current->LocalSettings;
 	auto HighestLevelReach = safe_cast<String^>(localSettings->Values->Lookup("HighestLevelReached"));
 	//medals = safe_cast<Array<int>^>(localSettings->Values->Lookup("medals"));
 	medals = ref new Array<int>(30);
 	if(HighestLevelReach==nullptr) HighestLevelReached =1;
 	else HighestLevelReached=ConvertToInt(HighestLevelReach);
-	/*for(int i=0;i<HighestLevelReached;i++)
+	for(int i=0;i<HighestLevelReached;i++)
 	{
-		auto med = safe_cast<String^>(localSettings->Values->Lookup("medal"+ConvertToPString(i)));
+		String^ temp= ref new String;
+		String^ med=ref new String;
+		temp="medal"+ConvertToPString(i);
+		med = safe_cast<String^>(localSettings->Values->Lookup("medal0"));
+		if(med!=nullptr)
 		medals[i]=ConvertToInt(med);
-	}*/
+		else
+			medals[i]=0;
+	}
 	Result->Text=ConvertToPString(medals[Level-1]);
 	LevelText->Text=ConvertToPString(Level);
 	InitializeObjects();
@@ -287,14 +297,18 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 		else
 		{
 			medals[Level-1]=med;
+			auto values = localSettings->Values;
+			auto temp = "medal"+ConvertToPString(Level-1);
+			values->Insert(temp,dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
 		}
 		if(Level+1>HighestLevelReached)
 		{
 			medals[Level-1] = med;
 			HighestLevelReached=Level+1;
 			auto values = localSettings->Values;
+			auto temp = "medal"+ConvertToPString(Level-1);
 			values->Insert("HighestLevelReached", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(HighestLevelReached))));
-			values->Insert("medal"+ConvertToPString(Level-1), dynamic_cast<PropertyValue^>(PropertyValue::CreateInt32Array(medals)));
+			values->Insert(temp, dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
 		}
 		  flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
 		{

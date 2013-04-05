@@ -60,8 +60,34 @@ void Project::LevelSelectPage::PageLoadedHandler(Platform::Object^ sender, Windo
 	levelsvector = ref new Platform::Collections::Vector<Levels^>();
 	auto localSettings = ApplicationData::Current->LocalSettings;
 	auto HighestLevelReach = safe_cast<String^>(localSettings->Values->Lookup("HighestLevelReached"));
-	for(int i=0;i<32;i++)
-		AddLevel(ConvertToPString(i+1),"1:00","Gold");
+	int HighestLevelReached;
+	String^ temp= ref new String;
+	if(HighestLevelReach==nullptr) HighestLevelReached =1;
+	else HighestLevelReached=ConvertToInt(HighestLevelReach);
+	auto medals = ref new Array<int>(30);
+	for(int i=0;i<HighestLevelReached;i++)
+	{
+		String^ med=ref new String;
+		temp="medal"+ConvertToPString(i);
+		med = safe_cast<String^>(localSettings->Values->Lookup(temp));
+		if(med!=nullptr)
+		medals[i]=ConvertToInt(med);
+		else
+			medals[i]=-1;
+	}
+	for(int i=0;i<HighestLevelReached;i++)
+	{
+		switch (medals[i])
+		{
+			case 3: temp = "Gold";break;
+			case 2: temp = "Silver";break;
+			case 1: temp = "Bronze";break;
+			case -1: temp = "None";break;
+		default:
+			break;
+		}
+		AddLevel(ConvertToPString(i+1),"1:00",temp);
+	}
 	itemListView->ItemsSource= levels;
 }
 
@@ -95,8 +121,8 @@ void Project::LevelSelectPage::ItemListView_SelectionChanged(Platform::Object^ s
 	auto lev = safe_cast<Levels^>(itemListView->SelectedItem);
 	if (!SettingsAnimatedPopup->IsOpen) 
             {
-                RootPopupBorder->Width = 646;
-				SettingsAnimatedPopup->HorizontalOffset = Window::Current->Bounds.Width-646;
+                RootPopupBorder->Width = 500;
+				SettingsAnimatedPopup->HorizontalOffset = Window::Current->Bounds.Width-500;
 				LevelNumber->Text=lev->number;
 				BestMedalText->Text=lev->BestMedal;
 				BestTimeText->Text=lev->BestTime;
@@ -112,7 +138,9 @@ void Project::LevelSelectPage::CloseSettingsPopupClicked(Platform::Object^ sende
 
 
 void Project::LevelSelectPage::StartSettingsPopupClicked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-		auto lev = safe_cast<Levels^>(itemListView->SelectedItem);
-		this->Frame->Navigate(MainPage::typeid,lev->number);
+{		
+	SettingsAnimatedPopup->Visibility=Windows::UI::Xaml::Visibility::Collapsed;
+	auto lev = safe_cast<Levels^>(itemListView->SelectedItem);
+	this->Frame->Navigate(MainPage::typeid,lev->number);
 }
+

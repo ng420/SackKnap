@@ -18,6 +18,8 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::Media;
+using namespace Windows::Storage::Pickers;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -55,7 +57,7 @@ void MenuPage::SaveState(IMap<String^, Object^>^ pageState)
 
 void Project::MenuPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	this->Frame->Navigate(MainPage::typeid,this);
+	this->Frame->Navigate(MainPage::typeid,"1");
 }
 
 
@@ -67,5 +69,12 @@ void Project::MenuPage::Button_Click_2(Platform::Object^ sender, Windows::UI::Xa
 
 void Project::MenuPage::Button_Click_3(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-
+	/*FileOpenPicker^ fileopenpicker = ref new FileOpenPicker();
+	auto singlefileoperation = fileopenpicker->PickSingleFileAsync();
+                if (singlefileoperation != nullptr)
+                {
+                     auto stream = singlefileoperation->OpenAsync(Windows::Storage::FileAccessMode::Read);
+					myMediaElement->SetSource(stream, "ContentType");
+                }
+				*/
 }
