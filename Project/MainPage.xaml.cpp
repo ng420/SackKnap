@@ -10,6 +10,8 @@
 #include <list>
 #include <time.h>
 #include "SubmissionPage.xaml.h"
+
+const int MAX(32);
 using namespace Project;
 
 using namespace Platform;
@@ -56,9 +58,13 @@ void MainPage::Initialize()
 	//Level=12;
 	localSettings = ApplicationData::Current->LocalSettings;
 	auto HighestLevelReach = safe_cast<String^>(localSettings->Values->Lookup("HighestLevelReached"));
+	if(localSettings->Values->HasKey("NumSubmit"))
+		NumSubmit=safe_cast<IPropertyValue^>(localSettings->Values->Lookup("NumSubmit"))->GetInt32();
+	else
+		NumSubmit=0;
 	//medals = safe_cast<Array<int>^>(localSettings->Values->Lookup("medals"));
-	medals = ref new Array<int>(30);
-	times = ref new Array<Platform::String^>(30);
+	medals = ref new Array<int>(MAX);
+	times = ref new Array<Platform::String^>(MAX);
 	if(HighestLevelReach==nullptr) HighestLevelReached =1;
 	else HighestLevelReached=ConvertToInt(HighestLevelReach);
 	for(int i=0;i<HighestLevelReached;i++)
@@ -275,6 +281,8 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	{
 		auto values = localSettings->Values;
 		auto Time = Timer->Text;
+		NumSubmit++;
+		values->Insert("NumSubmit", dynamic_cast<PropertyValue^>(PropertyValue::CreateInt32(NumSubmit)));
 		if(Level!=HighestLevelReached)
 		{
 			if(med>medals[Level-1])
@@ -329,7 +337,8 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 			composite->Insert("time", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
 			composite->Insert("med", dynamic_cast<PropertyValue^>(PropertyValue::CreateString(S)));	
 		values->Insert("CurrentLevelSetting", composite);
-		if(Level<32)
+		CheckAchievements();
+		if(Level<MAX+1)
 		  this->Frame->Navigate(SubmissionPage::typeid,this);
 		else
 			;
@@ -338,12 +347,9 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	{
 		 flyout->Commands->Append(ref new UICommand("Try Again", ref new UICommandInvokedHandler([this](IUICommand^ command)
 		{
-			//rootPage->NotifyUser("The 'Don't install' command has been selected.", NotifyType::StatusMessage);
 			IsPaused=false;
-		
 		})));
 		 flyout->DefaultCommandIndex = 0;
-		// Set the command to be invoked when escape is pressed
 		  flyout->CancelCommandIndex = 0;
 		  IsPaused=true;
 	flyout->ShowAsync();
@@ -452,4 +458,72 @@ bool Project::MainPage::isTimeLesser(Platform::String^ Time1,Platform::String^ T
 		DString[y] = (char)W[y];
 	}
 	return (strcmp(CString,DString)<0);
+}
+
+void MainPage::CheckAchievements()
+{
+	bool isComplete(false),isAllGold(false),isOnSpree(false),isOnUSpree(false),isTimeSavvy(false),isTimeUSavvy(false),isUSubmitter(false);
+	ApplicationDataContainer^ localSettings = ApplicationData::Current->LocalSettings;
+	ApplicationDataCompositeValue^ composit = safe_cast<ApplicationDataCompositeValue^>(localSettings->Values->Lookup("Achievements"));
+	int c(0);
+	if (composit!=nullptr)
+	{
+		isComplete = safe_cast<IPropertyValue^>(composit->Lookup("isComplete"))->GetBoolean();
+		isAllGold = safe_cast<IPropertyValue^>(composit->Lookup("isAllGold"))->GetBoolean();
+		isOnSpree = safe_cast<IPropertyValue^>(composit->Lookup("isOnSpree"))->GetBoolean();
+		isOnUSpree = safe_cast<IPropertyValue^>(composit->Lookup("isOnUSpree"))->GetBoolean();
+		isTimeSavvy = safe_cast<IPropertyValue^>(composit->Lookup("isTimeSavvy"))->GetBoolean();
+		isTimeUSavvy = safe_cast<IPropertyValue^>(composit->Lookup("isTimeUSavvy"))->GetBoolean();
+		isUSubmitter = safe_cast<IPropertyValue^>(composit->Lookup("isUSubmitter"))->GetBoolean();
+	}
+	if(!isComplete)
+		if(HighestLevelReached==MAX+1)
+			isComplete=true;
+	if(!isAllGold)
+	{	
+		for(auto medal:medals)
+		{
+			if(medal!=3)
+				c++;
+		}
+		if(!c)
+			isAllGold=true;
+	}
+	if(!isTimeSavvy)
+	{
+		c=0;
+		for(int i=0;i<10;i++)
+		{
+			if(!isTimeLesser(times[i],"0:30"))
+				c++;
+		}
+			if(!c)
+				isTimeSavvy=true;
+	}
+	if(!isTimeUSavvy&&HighestLevelReached>=20)
+	{
+		c=0;
+		for(int i=10;i<20;i++)
+		{
+			if(!isTimeLesser(times[i],"1:00"))
+				c++;
+		}
+			if(!c)
+				isTimeUSavvy=true;
+		
+	}
+	if(!isUSubmitter)
+		if(NumSubmit>=100)
+			isUSubmitter=true;
+
+	ApplicationDataCompositeValue^ composite = ref new ApplicationDataCompositeValue();
+	composite->Insert("isComplete", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isComplete)));
+	composite->Insert("isAllGold", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isAllGold)));
+	composite->Insert("isTimeSavvy", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isTimeSavvy)));
+	composite->Insert("isTimeUSavvy", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isTimeUSavvy)));
+	composite->Insert("isOnSpree", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isOnSpree)));
+	composite->Insert("isOnUSpree", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isOnUSpree)));
+	composite->Insert("isUSubmitter", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isUSubmitter)));
+	auto values = ApplicationData::Current->LocalSettings->Values;
+	values->Insert("Achievements", composite);
 }

@@ -29,7 +29,7 @@ namespace Project
 void PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e);
 		ObjectsGroup^ ObjGrp;
-		int HighestLevelReached;
+		int HighestLevelReached,NumSubmit;
 		Windows::Storage::ApplicationDataContainer^ localSettings;
 		Platform::Array<int>^ medals;
 		Platform::Array<Platform::String^>^times;
@@ -48,6 +48,7 @@ void PageLoadedHandler(Platform::Object^ sender,
 		void ObjectCreator(int t);
 	public:
 		void AnalyzeObjects();
+		void CheckAchievements();
 		bool isTimeLesser(Platform::String^ Time1,Platform::String^ Time2);
 		void StartTimerAndRegisterHandler();
 		void OnTick(Object^ sender,Object^ e);

@@ -22,20 +22,20 @@ void ::Project::AchievementsPage::InitializeComponent()
     // Call LoadComponent on ms-appx:///AchievementsPage.xaml
     ::Windows::UI::Xaml::Application::LoadComponent(this, ref new ::Windows::Foundation::Uri(L"ms-appx:///AchievementsPage.xaml"), ::Windows::UI::Xaml::Controls::Primitives::ComponentResourceLocation::Application);
 
-    // Get the Image named 'crazy'
-    crazy = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"crazy"));
-    // Get the Image named 'gold_in_all'
-    gold_in_all = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"gold_in_all"));
-    // Get the Image named 'finished_20_fast'
-    finished_20_fast = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"finished_20_fast"));
-    // Get the Image named 'completed_20_levels'
-    completed_20_levels = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"completed_20_levels"));
-    // Get the Image named 'completed_all_levels'
-    completed_all_levels = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"completed_all_levels"));
-    // Get the Image named 'finished_10_fast'
-    finished_10_fast = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"finished_10_fast"));
-    // Get the Image named 'completed_10_levels'
-    completed_10_levels = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"completed_10_levels"));
+    // Get the Image named 'IsUSubmitterImg'
+    IsUSubmitterImg = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"IsUSubmitterImg"));
+    // Get the Image named 'IsAllGoldImg'
+    IsAllGoldImg = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"IsAllGoldImg"));
+    // Get the Image named 'IsTimeUSavvyImg'
+    IsTimeUSavvyImg = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"IsTimeUSavvyImg"));
+    // Get the Image named 'isOnUSpreeImg'
+    isOnUSpreeImg = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"isOnUSpreeImg"));
+    // Get the Image named 'isCompleteText'
+    isCompleteText = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"isCompleteText"));
+    // Get the Image named 'isTimeSavvyImg'
+    isTimeSavvyImg = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"isTimeSavvyImg"));
+    // Get the Image named 'isOnSpreeImg'
+    isOnSpreeImg = safe_cast<::Windows::UI::Xaml::Controls::Image^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"isOnSpreeImg"));
     // Get the Button named 'backButton'
     backButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"backButton"));
     // Get the TextBlock named 'pageTitle'

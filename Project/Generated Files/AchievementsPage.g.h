@@ -32,13 +32,13 @@ namespace Project
     private:
         bool _contentLoaded;
     
-        private: ::Windows::UI::Xaml::Controls::Image^ crazy;
-        private: ::Windows::UI::Xaml::Controls::Image^ gold_in_all;
-        private: ::Windows::UI::Xaml::Controls::Image^ finished_20_fast;
-        private: ::Windows::UI::Xaml::Controls::Image^ completed_20_levels;
-        private: ::Windows::UI::Xaml::Controls::Image^ completed_all_levels;
-        private: ::Windows::UI::Xaml::Controls::Image^ finished_10_fast;
-        private: ::Windows::UI::Xaml::Controls::Image^ completed_10_levels;
+        private: ::Windows::UI::Xaml::Controls::Image^ IsUSubmitterImg;
+        private: ::Windows::UI::Xaml::Controls::Image^ IsAllGoldImg;
+        private: ::Windows::UI::Xaml::Controls::Image^ IsTimeUSavvyImg;
+        private: ::Windows::UI::Xaml::Controls::Image^ isOnUSpreeImg;
+        private: ::Windows::UI::Xaml::Controls::Image^ isCompleteText;
+        private: ::Windows::UI::Xaml::Controls::Image^ isTimeSavvyImg;
+        private: ::Windows::UI::Xaml::Controls::Image^ isOnSpreeImg;
         private: ::Windows::UI::Xaml::Controls::Button^ backButton;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ pageTitle;
     };

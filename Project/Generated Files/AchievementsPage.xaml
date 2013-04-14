@@ -31,7 +31,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10,0,0" Grid.Column="0">
-                        <Image x:Name="completed_10_levels" Width="60" Height="60" Source="Assets/pending.png"/>
+                        <Image x:Name="isOnSpreeImg" Width="60" Height="60" Source="Assets/pending.png"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Bring It On..!"/>
@@ -44,7 +44,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10,0,0" Grid.Column="0">
-                        <Image x:Name="finished_10_fast" Width="60" Height="60" Source="Assets/tick.png"/>
+                        <Image x:Name="isTimeSavvyImg" Width="60" Height="60" Source="Assets/tick.png"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Where did the time go?"/>
@@ -57,7 +57,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10,0,0" Grid.Column="0">
-                        <Image x:Name="completed_all_levels" Width="60" Height="60" Source="Assets/tick.png"/>
+                        <Image x:Name="isCompleteText" Width="60" Height="60" Source="Assets/tick.png"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="I've Done It"/>
@@ -70,7 +70,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10,0,0" Grid.Column="0">
-                        <Image x:Name="completed_20_levels" Width="60" Height="60" Source="Assets/pending.png"/>
+                        <Image x:Name="isOnUSpreeImg" Width="60" Height="60" Source="Assets/pending.png"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="On A Spree"/>
@@ -83,7 +83,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10,0,0" Grid.Column="0">
-                        <Image x:Name="finished_20_fast" Width="60" Height="60" Source="Assets/pending.png"/>
+                        <Image x:Name="IsTimeUSavvyImg" Width="60" Height="60" Source="Assets/pending.png"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Can't Beat Me..!"/>
@@ -96,7 +96,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10,0,0" Grid.Column="0">
-                        <Image x:Name="gold_in_all" Width="60" Height="60" Source="Assets/tick.png"/>
+                        <Image x:Name="IsAllGoldImg" Width="60" Height="60" Source="Assets/tick.png"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Looks Like We Have A Winner..!"/>
@@ -109,7 +109,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="0,10,0,0" Grid.Column="0">
-                        <Image x:Name="crazy" Width="60" Height="60" Source="Assets/tick.png"/>
+                        <Image x:Name="IsUSubmitterImg" Width="60" Height="60" Source="Assets/tick.png"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <TextBlock FontSize="30" TextAlignment="Left" Margin="30,10,30,0" TextWrapping="Wrap" Text="Absolutely Crazy About It"/>
