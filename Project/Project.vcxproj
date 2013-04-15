@@ -155,7 +155,7 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
-	<ClInclude Include="SubmissionPage.xaml.h">
+    <ClInclude Include="SubmissionPage.xaml.h">
       <DependentUpon>SubmissionPage.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
@@ -184,7 +184,7 @@
     <Page Include="MenuPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-	<Page Include="SubmissionPage.xaml">
+    <Page Include="SubmissionPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -195,6 +195,7 @@
     <None Include="Project_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\cargo.jpg" />
     <Image Include="Assets\help.png" />
     <Image Include="Assets\Hud.png" />
     <Image Include="Assets\Logo.png" />
@@ -238,7 +239,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-	<ClCompile Include="SubmissionPage.xaml.cpp">
+    <ClCompile Include="SubmissionPage.xaml.cpp">
       <DependentUpon>SubmissionPage.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>

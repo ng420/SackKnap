@@ -76,7 +76,7 @@
                     <DataTemplate>
                         <Grid HorizontalAlignment="Left" Width="130" Height="130" Margin="10,10,10,10">
                             <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                                <Image Source="/Assets/Logo.png" Stretch="UniformToFill" AutomationProperties.Name="{Binding Path=profit}"/>
+                                <Image Source="/Assets/Cargo.jpg" Stretch="UniformToFill" AutomationProperties.Name="{Binding Path=profit}"/>
                             </Border>
                             <StackPanel VerticalAlignment="Bottom" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
                                 <StackPanel Height="18" Orientation="Horizontal">

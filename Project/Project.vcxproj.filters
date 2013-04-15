@@ -52,6 +52,7 @@
     <ClCompile Include="LevelSelectPage.xaml.cpp" />
     <ClCompile Include="AchievementsPage.xaml.cpp" />
     <ClCompile Include="HelpPage.xaml.cpp" />
+    <ClCompile Include="SubmissionPage.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -80,6 +81,7 @@
     <ClInclude Include="LevelSelectPage.xaml.h" />
     <ClInclude Include="AchievementsPage.xaml.h" />
     <ClInclude Include="HelpPage.xaml.h" />
+    <ClInclude Include="SubmissionPage.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -94,7 +96,7 @@
     <Page Include="LevelSelectPage.xaml" />
     <Page Include="HelpPage.xaml" />
     <Page Include="AchievementsPage.xaml" />
-	<Page Include="SubmissionPage.xaml" />
+    <Page Include="SubmissionPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Main.png">
@@ -110,6 +112,9 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\pending.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\cargo.jpg">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

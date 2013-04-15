@@ -283,6 +283,7 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 	{
 		auto values = localSettings->Values;
 		auto Time = Timer->Text;
+		String^ temp;
 		NumSubmit++;
 		values->Insert("NumSubmit", dynamic_cast<PropertyValue^>(PropertyValue::CreateInt32(NumSubmit)));
 		if(Level!=HighestLevelReached)
@@ -291,16 +292,37 @@ void Project::MainPage::Submit(Platform::Object^ sender, Windows::UI::Xaml::Rout
 			{
 				medals[Level-1] = med;
 				values->Insert("medal"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(ConvertToPString(med))));
+				if(med>=1)
+				{switch (med)
+				{
+					case 3: temp = "Gold ";break;
+					case 2: temp = "Silver ";break;
+					case 1: temp = "Bronze ";break;
+					default:
+						break;
+				}
+				DisplayToast("New Medal Achieved On Level "+Level, temp+"medal achieved");}
 			}
 			if(isTimeLesser(Time,times[Level-1]))
 			{
 				times[Level-1]=Time;
 				values->Insert("time"+ConvertToPString(Level-1),dynamic_cast<PropertyValue^>(PropertyValue::CreateString(Time)));
+				DisplayToast("New Best Time Achieved On Level "+Level,Time);
 			}
 		}
 		else
 		{
 			medals[Level-1] = med;
+			if(med>=1)
+				{switch (med)
+				{
+					case 3: temp = "Gold ";break;
+					case 2: temp = "Silver ";break;
+					case 1: temp = "Bronze ";break;
+					default:
+						break;
+				}
+				DisplayToast("New Medal Achieved On Level "+Level, temp+"medal achieved");}
 			times[Level-1]=Time;
 			HighestLevelReached=Level+1;
 			auto values = localSettings->Values;
