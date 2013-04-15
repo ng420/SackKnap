@@ -27,6 +27,8 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Popups;
 using namespace Windows::Storage;
+using namespace Windows::UI::Notifications;
+using namespace Windows::Data::Xml::Dom;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -46,7 +48,7 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 	String^ L=ref new String;
 	L = ((String^)e->Parameter);
 	Level=ConvertToInt(L);
-	Initialize();	
+	Initialize();
 }
 void MainPage::PageLoadedHandler(Platform::Object^ sender,
           Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -478,7 +480,7 @@ void MainPage::CheckAchievements()
 	}
 	if(!isComplete)
 		if(HighestLevelReached==MAX+1)
-			isComplete=true;
+		{isComplete=true;DisplayToast("Achievement Unlocked!","I've Done It!");}
 	if(!isAllGold)
 	{	
 		for(auto medal:medals)
@@ -487,7 +489,7 @@ void MainPage::CheckAchievements()
 				c++;
 		}
 		if(!c)
-			isAllGold=true;
+		{isAllGold=true;DisplayToast("Achievement Unlocked!","Looks Like We Have A Winner..!");}
 	}
 	if(!isTimeSavvy)
 	{
@@ -498,7 +500,7 @@ void MainPage::CheckAchievements()
 				c++;
 		}
 			if(!c)
-				isTimeSavvy=true;
+			{isTimeSavvy=true;DisplayToast("Achievement Unlocked!","Where did the time go?");}
 	}
 	if(!isTimeUSavvy&&HighestLevelReached>=20)
 	{
@@ -509,12 +511,12 @@ void MainPage::CheckAchievements()
 				c++;
 		}
 			if(!c)
-				isTimeUSavvy=true;
+			{isTimeUSavvy=true;DisplayToast("Achievement Unlocked!","Can't Beat Me..!");}
 		
 	}
 	if(!isUSubmitter)
 		if(NumSubmit>=100)
-			isUSubmitter=true;
+		{isUSubmitter=true;DisplayToast("Achievement Unlocked!","Welcome To Profito");}
 
 	ApplicationDataCompositeValue^ composite = ref new ApplicationDataCompositeValue();
 	composite->Insert("isComplete", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isComplete)));
@@ -526,4 +528,15 @@ void MainPage::CheckAchievements()
 	composite->Insert("isUSubmitter", dynamic_cast<PropertyValue^>(PropertyValue::CreateBoolean(isUSubmitter)));
 	auto values = ApplicationData::Current->LocalSettings->Values;
 	values->Insert("Achievements", composite);
+}
+
+void Project::MainPage::DisplayToast(Platform::String^ Header,Platform::String^ text)
+{
+	ToastTemplateType toastTemplate = ToastTemplateType::ToastText02; 
+	XmlDocument^ toastXml = ToastNotificationManager::GetTemplateContent(toastTemplate);
+	XmlNodeList^ toastTextElements = toastXml->GetElementsByTagName("text");
+	toastTextElements->Item(0)->InnerText =  Header;
+	toastTextElements->Item(1)->InnerText =  text;
+	ToastNotification^ toast = ref new ToastNotification(toastXml);
+	ToastNotificationManager::CreateToastNotifier()->Show(toast);
 }

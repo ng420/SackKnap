@@ -26,8 +26,8 @@ void ::Project::LevelSelectPage::InitializeComponent()
     MyGrid = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"MyGrid"));
     // Get the GridView named 'itemListView'
     itemListView = safe_cast<::Windows::UI::Xaml::Controls::GridView^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"itemListView"));
-    // Get the Popup named 'SettingsAnimatedPopup'
-    SettingsAnimatedPopup = safe_cast<::Windows::UI::Xaml::Controls::Primitives::Popup^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"SettingsAnimatedPopup"));
+    // Get the StackPanel named 'SettingsAnimatedPopup'
+    SettingsAnimatedPopup = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"SettingsAnimatedPopup"));
     // Get the Border named 'RootPopupBorder'
     RootPopupBorder = safe_cast<::Windows::UI::Xaml::Controls::Border^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"RootPopupBorder"));
     // Get the TextBlock named 'BestTimeText'
